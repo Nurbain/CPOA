@@ -39,8 +39,10 @@ Vector<D,T> Vector<D,T>::operator+(const Vector& v){
 }
 
 template<int D,typename T>
-Vector<D,T> Vector<D,T>::operator+=(const Vector& v){
-
+void Vector<D,T>::operator+=(const Vector& v){
+    for(int i; i<D ; i++){
+        this->data[i] += v.data[i];
+    }
 }
 
 template<int D,typename T>
@@ -55,8 +57,10 @@ Vector<D,T> Vector<D,T>::operator-(const Vector& v){
 }
 
 template<int D,typename T>
-Vector<D,T> Vector<D,T>::operator-=(const Vector& v){
-
+void Vector<D,T>::operator-=(const Vector& v){
+    for(int i; i<D ; i++){
+        this->data[i] -= v.data[i];
+    }
 }
 
 template<int D,typename T>
@@ -71,8 +75,10 @@ Vector<D,T> Vector<D,T>::operator*(double f){
 }
 
 template<int D,typename T>
-Vector<D,T> Vector<D,T>::operator*=(double f){
-
+void Vector<D,T>::operator*=(double f){
+    for(int i; i<D ; i++){
+        this->data[i] *= f;
+    }
 }
 
 template<int D,typename T>
@@ -87,8 +93,10 @@ Vector<D,T> Vector<D,T>::operator/(double f){
 }
 
 template<int D,typename T>
-Vector<D,T> Vector<D,T>::operator/=(double f){
-
+void Vector<D,T>::operator/=(double f){
+    for(int i; i<D ; i++){
+        this->data[i] /= f;
+    }
 }
 
 template<int D,typename T>

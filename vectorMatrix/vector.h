@@ -16,16 +16,16 @@ class Vector : public Array<T,D>{
     bool operator==(const Vector& v);
 
     Vector operator+(const Vector& v);
-    Vector operator+=(const Vector& v);
+    void operator+=(const Vector& v);
 
     Vector operator-(const Vector& v);
-    Vector operator-=(const Vector& v);
+    void operator-=(const Vector& v);
 
     Vector operator*(double f);
-    Vector operator*=(double f);
+    void operator*=(double f);
 
     Vector operator/(double f);
-    Vector operator/=(double f);
+    void operator/=(double f);
 
     double prod_scalaire(const Vector& v, const Vector& u);
 
