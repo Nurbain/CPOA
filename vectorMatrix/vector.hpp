@@ -4,65 +4,68 @@
  * @file fonctions de vecteur
  */
 
-#ifndef _VECTOR_HPP_
-#define _VECTOR_HPP_
+#ifndef VECTOR_HPP
+#define VECTOR_HPP
 
 #include "vector.h"
 
 template<int D,typename T>
-void operator=(const Vector& v){
+void Vector<D,T>::operator=(const Vector& v){
 
 }
 
 template<int D,typename T>
-void operator==(const Vector& v){
+void Vector<D,T>::operator==(const Vector& v){
 
 }
 
 template<int D,typename T>
-Vector operator+(const Vector& v){
+Vector<D,T> Vector<D,T>::operator+(const Vector& v){
 
 }
 
 template<int D,typename T>
-Vector operator+=(const Vector& v){
+Vector<D,T> Vector<D,T>::operator+=(const Vector& v){
 
 }
 
 template<int D,typename T>
-Vector operator-(const Vector& v){
+Vector<D,T> Vector<D,T>::operator-(const Vector& v){
 
 }
 
 template<int D,typename T>
-Vector operator-=(const Vector& v){
+Vector<D,T> Vector<D,T>::operator-=(const Vector& v){
 
 }
 
 template<int D,typename T>
-Vector operator*(double f){
+Vector<D,T> Vector<D,T>::operator*(double f){
 
 }
 
 template<int D,typename T>
-Vector operator*=(double f){
+Vector<D,T> Vector<D,T>::operator*=(double f){
 
 }
 
 template<int D,typename T>
-Vector operator/(double f){
+Vector<D,T> Vector<D,T>::operator/(double f){
 
 }
 
 template<int D,typename T>
-Vector operator/=(double f){
+Vector<D,T> Vector<D,T>::operator/=(double f){
 
 }
 
-double prod_scalaire(const Vector& v, const Vector& u);
+template<int D,typename T>
+double Vector<D,T>::prod_scalaire(const Vector& v, const Vector& u){
+
+}
 
 
 
 
 
-#define
+#endif

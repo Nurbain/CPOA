@@ -4,8 +4,8 @@
  * @file fonctions de vecteur
  */
 
-#ifndef _VECTOR_H
-#define _VECTOR_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include "../InterfaceCSG/Array.h"
 
