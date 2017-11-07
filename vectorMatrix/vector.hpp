@@ -10,14 +10,14 @@
 #include "vector.h"
 
 template<int D,typename T>
-void Vector<D,T>::operator=(const Vector& v){
+void Vector<D,T>::operator=(const Vector<D,T>& v){
     for(int i;i<D;i++){
         this->data[i]=v[i];
     }
 }
 
 template<int D,typename T>
-bool Vector<D,T>::operator==(const Vector& v){
+bool Vector<D,T>::operator==(const Vector<D,T>& v){
     for(int i; i<D; i++){
         if(this->data[i]!=v[i]){
             return false;
@@ -28,7 +28,7 @@ bool Vector<D,T>::operator==(const Vector& v){
 
 
 template<int D,typename T>
-Vector<D,T> Vector<D,T>::operator+(const Vector& v){
+Vector<D,T> Vector<D,T>::operator+(const Vector<D,T>& v){
     Vector<D,T> newVector = new Vector<D,T>();
 
     for(int i; i<D ; i++){
@@ -39,14 +39,14 @@ Vector<D,T> Vector<D,T>::operator+(const Vector& v){
 }
 
 template<int D,typename T>
-void Vector<D,T>::operator+=(const Vector& v){
+void Vector<D,T>::operator+=(const Vector<D,T>& v){
     for(int i; i<D ; i++){
         this->data[i] += v[i];
     }
 }
 
 template<int D,typename T>
-Vector<D,T> Vector<D,T>::operator-(const Vector& v){
+Vector<D,T> Vector<D,T>::operator-(const Vector<D,T>& v){
     Vector<D,T> newVector = new Vector<D,T>();
 
     for(int i; i<D ; i++){
@@ -57,7 +57,7 @@ Vector<D,T> Vector<D,T>::operator-(const Vector& v){
 }
 
 template<int D,typename T>
-void Vector<D,T>::operator-=(const Vector& v){
+void Vector<D,T>::operator-=(const Vector<D,T>& v){
     for(int i; i<D ; i++){
         this->data[i] -= v[i];
     }
@@ -108,8 +108,6 @@ T produit_scalaire(const Vector<D,T>& v, const Vector<D,T>& u){
 
     return result;
 }
-
-
 
 
 
