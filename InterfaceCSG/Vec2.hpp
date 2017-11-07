@@ -11,7 +11,7 @@ T produit_scalaire(const Vec2<T>& v1, const Vec2<T>& v2){
 
 template<typename T>
 T Vec2<T>::norme() const{
-    return sqrt(produit_scalaire(this,this));
+    return sqrt(produit_scalaire(*this,*this));
 }
 
 #endif

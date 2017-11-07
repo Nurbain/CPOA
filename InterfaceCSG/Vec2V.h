@@ -11,8 +11,8 @@ class Vec2V : public Vec2<float>{
         inline Vec2V(){
             float dx = float(std::rand())/RAND_MAX;
             float dy = float(std::rand())/RAND_MAX;
-            vitesse[0]=(dx-0.5f);
-            vitesse[1]=(dy-0.5f);
+            vitesse[0]=(dx-0.5f)/50;
+            vitesse[1]=(dy-0.5f)/50;
         }
 
         inline void avance(float Ox=0, float Oy=0){

@@ -22,30 +22,30 @@ class MainWindow;
 class GraphTextEdit: public QPlainTextEdit
 {
 protected:
-	char m_pressed;
+    char m_pressed;
 public:
 
-	GraphTextEdit();
+    GraphTextEdit();
 
-	void keyPressEvent(QKeyEvent* event) { m_pressed = char(event->key()+32); }
+    void keyPressEvent(QKeyEvent* event) { m_pressed = char(event->key()+32); }
 
-	void keyReleaseEvent(QKeyEvent* /*event*/) { m_pressed = char(0); }
+    void keyReleaseEvent(QKeyEvent* /*event*/) { m_pressed = char(0); }
 
-	char pressed() const { return m_pressed; }
+    char pressed() const { return m_pressed; }
 };
 
 
 
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 
 private:
-	Ui::MainWindow *ui;
-	RenderImg* m_render;
+    Ui::MainWindow *ui;
+    RenderImg* m_render;
 
 protected:
-	/// current selected node
+    /// current selected node
 //	CsgNode* m_currentNode;
 
 //	/// current primitive (could be NULL)
@@ -57,62 +57,62 @@ protected:
 //	/// the CSG tree
 //	CsgTree m_tree;
 
-	/// Bounding Box to draw
+    /// Bounding Box to draw
 //	BoundingBox m_bb;
 
-	/// widget for ascii art grapg drawing
-	GraphTextEdit* m_graphTextEdit;
+    /// widget for ascii art grapg drawing
+    GraphTextEdit* m_graphTextEdit;
 
-	/// current transfo matrix for storing current primitive matrix
+    /// current transfo matrix for storing current primitive matrix
 //	Matrix33d m_transfo;
 
 //	std::vector<Matrix33d> m_transfos;
 //	std::vector<CsgPrimitive*> m_prims;
 //	Vec2f m_centerSelection;
 
-	/// just to avoid ping-pong signal
-	bool m_stopSignal;
+    /// just to avoid ping-pong signal
+    bool m_stopSignal;
 
-	/// current center of current node
+    /// current center of current node
 //	Vec2f m_stored_center;
 
-	void updateTextGraph();
+    void updateTextGraph();
 
-	void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *event);
 
-	/// transfo has changed from interface
-	void transfoChanged();
+    /// transfo has changed from interface
+    void transfoChanged();
 
-	void resetTransfoWidgets();
+    void resetTransfoWidgets();
 
 
 public:
-	explicit MainWindow(QWidget *parent = 0);
-	~MainWindow();
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
-	void drawTree();
+    void drawTree();
 
 public slots:
-	void createPrimtive();
-	void createOperation();
-	void applyTransfo();
-	void resetTransfo();
-	void transfoSliderChanged();
-	void transfoSpinChanged();
-	void loadImage();
-	void saveImage();
-	void drawSobel();
-	void loadCSG();
-	void saveCSG();
-	void appendCSG();
-	void clearCSG();
-	void swapLRRoot();
-	void unjoinRoot();
-	void clone();
-	void updateTreeRender();
-	void currentNodeChanged(int id);
-	void nodeTextSelected(bool);
-	
+    void createPrimtive();
+    void createOperation();
+    void applyTransfo();
+    void resetTransfo();
+    void transfoSliderChanged();
+    void transfoSpinChanged();
+    void loadImage();
+    void saveImage();
+    void drawSobel();
+    void loadCSG();
+    void saveCSG();
+    void appendCSG();
+    void clearCSG();
+    void swapLRRoot();
+    void unjoinRoot();
+    void clone();
+    void updateTreeRender();
+    void currentNodeChanged(int id);
+    void nodeTextSelected(bool);
+
 
 };
 
