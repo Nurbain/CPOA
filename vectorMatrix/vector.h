@@ -13,7 +13,7 @@ template<int D, typename T>
 class Vector : public Array<T,D>{
 
     void operator=(const Vector& v);
-    void operator==(const Vector& v);
+    bool operator==(const Vector& v);
 
     Vector operator+(const Vector& v);
     Vector operator+=(const Vector& v);
