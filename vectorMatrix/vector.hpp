@@ -100,8 +100,13 @@ void Vector<D,T>::operator/=(double f){
 }
 
 template<int D,typename T>
-double Vector<D,T>::prod_scalaire(const Vector& v, const Vector& u){
+T produit_scalaire(const Vector<D,T>& v, const Vector<D,T>& u){
+    T result;
+    for(int i; i<D ;i++){
+        result += v[i]*u[i];
+    }
 
+    return result;
 }
 
 

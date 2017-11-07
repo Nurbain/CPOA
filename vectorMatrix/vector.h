@@ -27,7 +27,7 @@ class Vector : public Array<T,D>{
     Vector operator/(double f);
     void operator/=(double f);
 
-    double prod_scalaire(const Vector& v, const Vector& u);
+    T prod_scalaire(const Vector& v, const Vector& u);
 
     //TODO produit vectoriel
 };
