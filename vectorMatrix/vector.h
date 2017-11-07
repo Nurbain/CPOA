@@ -33,6 +33,17 @@ class Vector : public Array<T,D>{
 };
 
 
+// Classe Int
+class Vec2i : public Vector<2,int>{};
+class Vec3i : public Vector<3,int>{};
+class Vec4i : public Vector<4,int>{};
+
+// Classe Float
+class Vec2d : public Vector<2,double>{};
+class Vec3d : public Vector<3,double>{};
+class Vec4d : public Vector<4,double>{};
+
+
 #include "vector.hpp"
 
 #endif
