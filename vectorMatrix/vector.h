@@ -115,17 +115,17 @@ public :
     T scalar_product(const Vector& v, const Vector& u);
 
     /**
-     * @brief cross product for dimension 3
-     */
-    template <bool B=true>
-        typename std::enable_if<(B && D==2), Vector<D,T>>::type cross(const Vector<D,T>& v) const;
-
-    /**
      * @brief cross product for dimension 2
      */
-    template <bool B=true>
-        typename std::enable_if<(B && D==3), Vector<D,T>>::type cross(const Vector<D,T>& v) const;
+    //typename std::enable_if<(D==2), Vector<D,T>>::type cross(const Vector<D,T>& u,const Vector<D,T>& v);
 
+    /**
+     * @brief cross product for dimension 3
+     */
+    typename std::enable_if<(D==3), Vector<D,T>>::type cross(const Vector<D,T>& u,const Vector<D,T>& v);
+
+
+    void display();
 };
 
 
