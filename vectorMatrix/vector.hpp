@@ -40,7 +40,7 @@ Vector<D,T> Vector<D,T>::operator+(const Vector<D,T>& v){
 
 template<int D,typename T>
 void Vector<D,T>::operator+=(const Vector<D,T>& v){
-    for(int i; i<D ; i++){
+    for(int i=0; i<D ; i++){
         this->data[i] += v[i];
     }
 }
