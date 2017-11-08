@@ -1,7 +1,7 @@
 /**
  * @author Nathan Urbain
  * @date 7/11/2017
- * @file fonctions de vecteur
+ * @file vector function
  */
 
 #ifndef VECTOR_H
@@ -9,52 +9,137 @@
 
 #include "../InterfaceCSG/Array.h"
 #include <assert.h>
+#include <iostream>
 
+/**
+ * @class Vector
+ * @brief Classe template who define Vector
+ * @property Defined by a Dimension(2,3,4) and Type(int,double)
+ */
 template<int D, typename T>
 class Vector : public Array<T,D>{
 
-    public :
-        Vector() : Array<T,D>(){}
-        Vector(std::initializer_list<T> list)
-        {
-            assert(list.size() == D);
-            int i = 0;
-            for(int x: list)
-                this->data[i++] = x;
-        }
+public :
 
-        Vector& operator=(const Vector& v);
-        bool operator==(const Vector& v);
+    /**
+     * @brief Vector, Empty Constructor
+     */
+    Vector() : Array<T,D>(){}
 
-        Vector operator+(const Vector& v);
-        void operator+=(const Vector& v);
+    /**
+     * @brief Vector, Constructor by list
+     * @param list, list of elements
+     */
+    Vector(std::initializer_list<T> list)
+    {
+        assert(list.size() == D);
+        int i = 0;
+        for(int x: list)
+            this->data[i++] = x;
+    }
 
-        Vector operator-(const Vector& v);
-        void operator-=(const Vector& v);
+    /**
+     * @brief operator =, affectation by copy
+     * @param v, vector with same Dimension and Type
+     * @return Vector&
+     */
+    Vector& operator=(const Vector& v);
 
-        Vector operator*(double f);
-        void operator*=(double f);
+    /**
+     * @brief operator ==, verification of eguality
+     * @param v, vector with same Dimension and Type
+     * @return true if vector equals
+     */
+    bool operator==(const Vector& v);
 
-        Vector operator/(double f);
-        void operator/=(double f);
+    /**
+     * @brief operator +, sum with a vector for a third vector
+     * @param v, vector with same Dimension and Type
+     * @return  new sum of the 2 vector
+     */
+    Vector operator+(const Vector& v);
 
-        T prod_scalaire(const Vector& v, const Vector& u);
+    /**
+     * @brief operator +=, sum with himself and a vector
+     * @param v, vector with same Dimension and Type
+     */
+    void operator+=(const Vector& v);
 
-        //TODO produit vectoriel
+
+    /**
+     * @brief operator -, soustraction with a vector for a third vector
+     * @param v, vector with same Dimension and Type
+     * @return  new soustraction of the 2 vector
+     */
+    Vector operator-(const Vector& v);
+
+    /**
+     * @brief operator -=, soustraction with himself and a vector
+     * @param v, vector with same Dimension and Type
+     */
+    void operator-=(const Vector& v);
+
+
+    /**
+     * @brief operator *, product with a double for a second vector
+     * @param f, double
+     * @return new vector
+     */
+    Vector operator*(double f);
+
+    /**
+     * @brief operator *=, product with himself and a double
+     * @param f, double
+     */
+    void operator*=(double f);
+
+    /**
+     * @brief operator /, division with a double for a second vector
+     * @param f, double
+     * @return new vector
+     */
+    Vector operator/(double f);
+
+    /**
+     * @brief operator /=, division with himself and a double
+     * @param f, double
+     */
+    void operator/=(double f);
+
+    /**
+     * @brief scalar_product, compute the scalar product beetween 2 vector of same D and T
+     * @param v, vector
+     * @param u, vector
+     * @return T number
+     */
+    T scalar_product(const Vector& v, const Vector& u);
+
+    /**
+     * @brief cross product for dimension 3
+     */
+    template <bool B=true>
+        typename std::enable_if<(B && D==2), Vector<D,T>>::type cross(const Vector<D,T>& v) const;
+
+    /**
+     * @brief cross product for dimension 2
+     */
+    template <bool B=true>
+        typename std::enable_if<(B && D==3), Vector<D,T>>::type cross(const Vector<D,T>& v) const;
+
 };
 
 
-// Classe Int
+
+
+// Int Vector explicit declaration with Dimension 2,3,4
 using Vec2i = Vector<2,int>;
 using Vec3i = Vector<3,int>;
 using Vec4i = Vector<4,int>;
 
-// Classe Float
+// Float Vector explicit declaration with Dimension 2,3,4
 using Vec2d = Vector<2,double>;
 using Vec3d = Vector<3,double>;
 using Vec4d = Vector<4,double>;
-
-
 
 
 #include "vector.hpp"

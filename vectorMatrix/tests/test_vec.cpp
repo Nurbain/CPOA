@@ -80,7 +80,7 @@ int main()
 
     Vec3d v7 = {2,2,2};
     Vec3d v8 = {1,2,3};
-    double resultatScalaire = produit_scalaire(v7,v8);
+    double resultatScalaire = scalar_product(v7,v8);
     assert(resultatScalaire == 12);
     std::cout << "Function Scalaire product : PASSED" << std::endl;
 
