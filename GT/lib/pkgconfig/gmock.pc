@@ -1,0 +1,9 @@
+libdir=/adhome/n/nu/nurbain/Documents/TP_test/GT/lib
+includedir=/adhome/n/nu/nurbain/Documents/TP_test/GT/include
+
+Name: gmock
+Description: GoogleMock (without main() function)
+Version: 1.9.0
+URL: https://github.com/google/googletest
+Libs: -L${libdir} -lgmock -pthread
+Cflags: -I${includedir} -DGTEST_HAS_PTHREAD=1 -pthread

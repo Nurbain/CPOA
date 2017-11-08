@@ -1,8 +1,15 @@
 #include <iostream>
 #include "vector.h"
 
+
+
 int main()
 {
+    /*
+    testing::InitGoogleTest(&argc, argv);
+    setlocale(LC_CTYPE, "");
+    return RUN_ALL_TESTS();
+    */
     Vec3d v1 = {1,2,3};
     Vec3d v2 = Vec3d();
 
