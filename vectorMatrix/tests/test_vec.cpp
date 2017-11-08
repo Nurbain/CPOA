@@ -78,12 +78,17 @@ int main()
     assert(v6[2] == 0.5);
     std::cout << "Operator /= : PASSED" << std::endl;
 
-
     Vec3d v7 = {2,2,2};
     Vec3d v8 = {1,2,3};
     double resultatScalaire = produit_scalaire(v7,v8);
     assert(resultatScalaire == 12);
     std::cout << "Function Scalaire product : PASSED" << std::endl;
+
+    v8 = 0.5*v8;
+    assert(v8[0] == 0.5);
+    assert(v8[1] == 1);
+    assert(v8[2] == 1.5);
+    std::cout << "Test V = 0.5*V : PASSED" << std::endl;
 
 	return 0;
 

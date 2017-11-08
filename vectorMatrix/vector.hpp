@@ -111,4 +111,13 @@ T produit_scalaire(const Vector<D,T>& v, const Vector<D,T>& u){
     return result;
 }
 
+template<int D,typename T>
+Vector<D,T> operator*(double f, const Vector<D,T>& v){
+    Vector<D,T> newVector;
+    for(int i=0; i<D ; i++){
+        newVector[i]= v[i]*f;
+    }
+    return newVector;
+}
+
 #endif
