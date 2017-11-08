@@ -23,7 +23,7 @@ class Vector : public Array<T,D>{
                 this->data[i++] = x;
         }
 
-        void operator=(const Vector& v);
+        Vector& operator=(const Vector& v);
         bool operator==(const Vector& v);
 
         Vector operator+(const Vector& v);
@@ -68,11 +68,7 @@ class Vec2d : public Vector<2,double>{
         Vec2d(std::initializer_list<double> list): Vector<2,double>(list){}
 };
 
-class Vec3d : public Vector<3,double>{
-    public:
-        Vec3d() : Vector<3,double>() {}
-        Vec3d(std::initializer_list<double> list): Vector<3,double>(list){}
-};
+using Vec3d = Vector<3,double>;
 
 class Vec4d : public Vector<4,double>{
     public:
