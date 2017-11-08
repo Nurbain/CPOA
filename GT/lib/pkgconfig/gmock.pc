@@ -1,5 +1,5 @@
-libdir=/adhome/n/nu/nurbain/Documents/TP_test/GT/lib
-includedir=/adhome/n/nu/nurbain/Documents/TP_test/GT/include
+libdir=/home/nathan/Documents/ProjetCPOA/CPOA/GT/lib
+includedir=/home/nathan/Documents/ProjetCPOA/CPOA/GT/include
 
 Name: gmock
 Description: GoogleMock (without main() function)
