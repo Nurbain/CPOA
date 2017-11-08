@@ -113,12 +113,14 @@ T scalar_product(const Vector<D,T>& v, const Vector<D,T>& u){
     return result;
 }
 
-/*
-template<int D, class T>
-typename std::enable_if<(D == 2), Vector<D, T> >::type cross(const Vector<D,T>& u, const Vector<D,T>& v){
 
+template<int D, class T>
+typename std::enable_if<(D == 2), T >::type cross(const Vector<D,T>& u, const Vector<D,T>& v){
+    T resultat;
+    resultat = u[0]*v[1]-v[0]*u[1];
+    return resultat;
 }
-*/
+
 
 
 template<int D, class T>
@@ -128,15 +130,6 @@ typename std::enable_if<(D == 3), Vector<D, T> >::type cross(const Vector<D,T>& 
     newVector[1]=u[2]*v[0]-u[0]*v[2];
     newVector[2]=u[0]*v[1]-u[1]*v[0];
     return newVector;
-}
-
-
-template<int D,typename T>
-void  Vector<D,T>::display(){
-    for(int i=0; i<D;i++){
-        std::cout << (*this)[i] << std::endl;
-    }
-
 }
 
 

@@ -117,6 +117,10 @@ int main()
     assert(v11[2] == 23);
     std::cout << "Test Cross product : PASSED" << std::endl;
 
+    //------------------------
+    //Display Test
+    std::cout <<"v11 = " << v11 << std::endl;
+
 	return 0;
 
 }
