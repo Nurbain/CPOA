@@ -30,8 +30,60 @@ int main()
     std::cout << "Operator == : PASSED" << std::endl;
 
     Vec3d v3 = v1 + v2;
+    assert(v3[0] == 2);
+    assert(v3[1] == 4);
+    assert(v3[2] == 6);
+    std::cout << "Operator + : PASSED" << std::endl;
+
+    v1 += v3;
+    assert(v1[0] == 3);
+    assert(v1[1] == 6);
+    assert(v1[2] == 9);
+    std::cout << "Operator += : PASSED" << std::endl;
+
+    Vec3d v4 = v3 - v1;
+    assert(v4[0] == -1);
+    assert(v4[1] == -2);
+    assert(v4[2] == -3);
+    std::cout << "Operator - : PASSED" << std::endl;
+
+    v4 -= v3;
+    assert(v4[0] == -3);
+    assert(v4[1] == -6);
+    assert(v4[2] == -9);
+    std::cout << "Operator -= : PASSED" << std::endl;
+
+    Vec3d v5 = v2*10;
+    assert(v5[0] == 10);
+    assert(v5[1] == 20);
+    assert(v5[2] == 30);
+    std::cout << "Operator * : PASSED" << std::endl;
+
+    v5*= 10;
+    assert(v5[0] == 100);
+    assert(v5[1] == 200);
+    assert(v5[2] == 300);
+    std::cout << "Operator *= : PASSED" << std::endl;
+
+    v5 = v3 / 2;
+    assert(v5[0] == 1);
+    assert(v5[1] == 2);
+    assert(v5[2] == 3);
+    std::cout << "Operator / : PASSED" << std::endl;
+
+    Vec3d v6 = {12,15,3};
+    v6 /= 6;
+    assert(v6[0] == 2);
+    assert(v6[1] == 2.5);
+    assert(v6[2] == 0.5);
+    std::cout << "Operator /= : PASSED" << std::endl;
 
 
+    Vec3d v7 = {2,2,2};
+    Vec3d v8 = {1,2,3};
+    double resultatScalaire = produit_scalaire(v7,v8);
+    assert(resultatScalaire == 12);
+    std::cout << "Function Scalaire product : PASSED" << std::endl;
 
 	return 0;
 

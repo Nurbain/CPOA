@@ -49,7 +49,7 @@ void Vector<D,T>::operator+=(const Vector<D,T>& v){
 
 template<int D,typename T>
 Vector<D,T> Vector<D,T>::operator-(const Vector<D,T>& v){
-    Vector<D,T> newVector = new Vector<D,T>();
+    Vector<D,T> newVector;
 
     for(int i=0; i<D ; i++){
         newVector[i]= this->data[i]-v[i];
@@ -67,7 +67,7 @@ void Vector<D,T>::operator-=(const Vector<D,T>& v){
 
 template<int D,typename T>
 Vector<D,T> Vector<D,T>::operator*(double f){
-    Vector<D,T> newVector = new Vector<D,T>();
+    Vector<D,T> newVector;
 
     for(int i=0; i<D ; i++){
         newVector[i]= this->data[i]*f;
@@ -85,7 +85,7 @@ void Vector<D,T>::operator*=(double f){
 
 template<int D,typename T>
 Vector<D,T> Vector<D,T>::operator/(double f){
-    Vector<D,T> newVector = new Vector<D,T>();
+    Vector<D,T> newVector;
 
     for(int i=0; i<D ; i++){
         newVector[i]= this->data[i]/f;
