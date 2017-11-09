@@ -24,6 +24,17 @@ int main()
     std::cout << "Test list constructor : PASSED"<<  std::endl;
 
     //------------------------
+    //Test Copy
+    Matrix33d m5 = m2;
+    for(int i=0;i<DIM;i++){
+        for(int j=0;j<DIM;j++){
+            assert(m5[i][j]==m2[i][j]);
+            x++;
+        }
+    }
+    std::cout << "Test copy : PASSED"<<  std::endl;
+
+    //------------------------
     //Test Identity
     Matrix33d m3 = Matrix33d::identity();
     for(int i=0;i<DIM;i++){
@@ -40,9 +51,16 @@ int main()
 
 
     //------------------------
+    //Test Inverse
+    Matrix33d m4 = m2;
+    m4[0][0]=2.;
+    std::cout << m4 <<std::endl;
+
+
+    //------------------------
     //Test Display
     Matrix33d m = {1,45,3,0,4,8,9,7,42};
-    std::cout << m <<  std::endl;
+    std::cout << "Test Display : \n" <<m <<  std::endl;
 
 
 /*

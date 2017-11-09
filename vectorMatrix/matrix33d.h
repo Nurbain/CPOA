@@ -27,13 +27,13 @@ public:
                 x++;
             }
     }
-    Matrix33d operator=(const Matrix33d& m);//
+    Matrix33d& operator=(const Matrix33d& m);
     static Matrix33d identity();
 
     Array<double,DIM> operator[](const int index) const;
     Matrix33d operator*(const Vec3d& v);//
 
-    void inverse();//
+    Matrix33d inverse();
 
 
 
