@@ -3,6 +3,11 @@
 
 int main()
 {
+    Matrix33d m1 = Matrix33d();
+
+    std::cout << m1 <<  std::endl;
+
+
     /*
 	Matrix33d m1 = Matrix33d::identity();
 
