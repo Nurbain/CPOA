@@ -10,26 +10,32 @@
 #include "vector.h"
 #include "../InterfaceCSG/Array.h"
 
+const int DIM = 3;
+
 class Matrix33d{
 protected:
-    Array<double,3> Tab[3];
+    Array<double,DIM> Tab[DIM];
 public:
     Matrix33d();
-
-    /*Matrix33d(std::initializer_list<double> list)
+    Matrix33d(std::initializer_list<double> list)
     {
-        assert(list.size() == 9);
+        assert(list.size() == (DIM*DIM));
         int x = 0;
-        for(int i=0; i<3; i++)
-            for(int j=0; j<3; j++){
-                this->get_line(i)[j]=list.;
+        for(int i=0; i<DIM; i++)
+            for(int j=0; j<DIM; j++){
+                this->Tab[i][j]= list.begin()[x];
                 x++;
             }
-    }*/
+    }
+    Matrix33d operator=(const Matrix33d& m);//
+    static Matrix33d identity();
+
+    Array<double,DIM> operator[](const int index) const;
+    Matrix33d operator*(const Vec3d& v);//
+
+    void inverse();//
 
 
-    Array<double,3> get_line(const int index) const;
-    Array<double,3> operator[](const int index) const;
 
 
     inline friend std::ostream& operator<<(std::ostream& os, const Matrix33d& m){
