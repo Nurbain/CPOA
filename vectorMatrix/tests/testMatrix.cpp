@@ -84,6 +84,57 @@ int main()
 
 
     //------------------------
+    //Test static translation
+    Matrix33d m7 = Matrix33d::translation(2,4);
+    for(int i = 0; i<DIM; i++){
+        for(int j=0 ;j<DIM ;j++){
+            if(i==j)
+                assert(m7[i][j]==1);
+            else if(i==0 && j==2)
+                assert(m7[i][j]==2);
+            else if(i==1 && j==2)
+                assert(m7[i][j]==4);
+            else
+                assert(m7[i][j]==0);
+        }
+    }
+    std::cout << "Test Matrice translation : PASSED" <<  std::endl;
+
+    //------------------------
+    //Test static rotation
+    Matrix33d m8 = Matrix33d::rotation(M_PI);
+    for(int i = 0; i<DIM; i++){
+        for(int j=0 ;j<DIM ;j++){
+            if(i==j && i!=2)
+                assert(m8[i][j]==-1);
+            else if(i==j)
+                assert(m8[i][j]==1);
+            else if(i==0 && j==1)
+                assert(m8[i][j]-sin(M_PI)<= 0.0000001 && m8[i][j]-sin(M_PI)>= -0.0000001 );
+            else if(i==1 && j==0)
+                assert(m8[i][j]-sin(M_PI)<= 0.0000001 && m8[i][j]-sin(M_PI)>= -0.0000001 );
+            else
+                assert(m8[i][j]==0);
+        }
+    }
+    std::cout << "Test Matrice rotation : PASSED" <<  std::endl;
+
+    //------------------------
+    //Test static scaling
+    Matrix33d m9 = Matrix33d::scale(4,4);
+    for(int i = 0; i<DIM; i++){
+        for(int j=0 ;j<DIM ;j++){
+            if(i==j && i != 2)
+                assert(m9[i][j]==4);
+            else if(i==j)
+                assert(m9[i][j]==1);
+            else
+                assert(m9[i][j]==0);
+        }
+    }
+    std::cout << "Test Matrice homothétie : PASSED" <<  std::endl;
+
+    //------------------------
     //Test Display
     Matrix33d m = {1,45,3,0,4,8,9,7,42};
     std::cout << "Test Display : \n" <<m <<  std::endl;

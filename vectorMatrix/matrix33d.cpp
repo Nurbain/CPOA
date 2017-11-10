@@ -79,4 +79,29 @@ Matrix33d Matrix33d::inverse(){
 }
 
 
+Matrix33d Matrix33d::translation(const double dx,const double dy){
+    Matrix33d newMatrix = Matrix33d::identity();
+    newMatrix[0][2]=dx;
+    newMatrix[1][2]=dy;
+    return newMatrix;
+}
 
+Matrix33d Matrix33d::rotation(const double angle){
+    Matrix33d newMatrix = Matrix33d::identity();
+    newMatrix[0][0] = cos(angle);
+    newMatrix[1][1] = cos(angle);
+
+    newMatrix[0][1] = -sin(angle);
+    newMatrix[1][0] = sin(angle);
+
+    return newMatrix;
+}
+
+Matrix33d Matrix33d::scale(const double sx,const double sy){
+    Matrix33d newMatrix = Matrix33d::identity();
+
+    newMatrix[0][0] = sx;
+    newMatrix[1][1] = sy;
+
+    return newMatrix;
+}
