@@ -73,6 +73,17 @@ int main()
 
 
     //------------------------
+    //Test Multpilication vecteur
+    Matrix33d m6 = {1,1,1,2,2,2,3,3,3};
+    Vec3d v1 = {1,2,3};
+    v1 = m6*v1;
+    assert(v1[0] == 6);
+    assert(v1[1] == 12);
+    assert(v1[2] == 18);
+    std::cout << "Test Multpilication vecteur : PASSED" <<  std::endl;
+
+
+    //------------------------
     //Test Display
     Matrix33d m = {1,45,3,0,4,8,9,7,42};
     std::cout << "Test Display : \n" <<m <<  std::endl;

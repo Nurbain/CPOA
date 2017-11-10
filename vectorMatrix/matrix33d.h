@@ -8,7 +8,7 @@
 #define __MATRIX33D_H__
 
 #include "vector.h"
-#include "../InterfaceCSG/Array.h"
+#include "array.h"
 
 const int DIM = 3;
 
@@ -33,7 +33,7 @@ public:
     Array<double,DIM> operator[](const int index) const;
     Array<double,DIM>& operator[](const int index);
 
-    Matrix33d operator*(const Vec3d& v);//
+    Vec3d operator*(const Vec3d& v);
     Matrix33d inverse();
 
 

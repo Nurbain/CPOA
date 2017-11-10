@@ -38,8 +38,14 @@ Matrix33d Matrix33d::identity(){
 }
 
 
-Matrix33d Matrix33d::operator*(const Vec3d& v){
-
+Vec3d Matrix33d::operator*(const Vec3d& v){
+    Vec3d newVec;
+    for(int i=0;i<DIM;i++){
+        for(int j=0;j<DIM;j++){
+            newVec[i]+=(*this)[i][j] * v[j];
+        }
+    }
+    return newVec;
 }
 
 
