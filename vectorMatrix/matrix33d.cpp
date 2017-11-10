@@ -105,3 +105,32 @@ Matrix33d Matrix33d::scale(const double sx,const double sy){
 
     return newMatrix;
 }
+
+Matrix33d Matrix33d::operator*(const Matrix33d& m){
+    Matrix33d newMatrix;
+    for(int i=0;i<DIM;i++){
+        for(int j=0;j<DIM;j++){
+            for(int l=0;l<DIM;l++){
+                newMatrix[i][j]+=(*this)[i][l] * m[l][j];
+            }
+        }
+    }
+    return newMatrix;
+}
+
+
+Matrix33d setRotation(const Matrix33d& m){
+
+}
+
+Matrix33d applyRotation(const Matrix33d& m){
+
+}
+
+Matrix33d setScale(const Matrix33d& m){
+
+}
+
+Matrix33d applyScale(const Matrix33d& m){
+
+}

@@ -35,12 +35,18 @@ public:
     Array<double,DIM>& operator[](const int index);
 
     Vec3d operator*(const Vec3d& v);
+    Matrix33d operator*(const Matrix33d& m);
     Matrix33d inverse();
 
     static Matrix33d translation(const double dx,const double dy);
     static Matrix33d rotation(const double angle);
     static Matrix33d scale(const double sx,const double sy);
 
+    Matrix33d setRotation(const Matrix33d& m);
+    Matrix33d applyRotation(const Matrix33d& m);
+
+    Matrix33d setScale(const Matrix33d& m);
+    Matrix33d applyScale(const Matrix33d& m);
 
 
 

@@ -135,6 +135,22 @@ int main()
     std::cout << "Test Matrice homothétie : PASSED" <<  std::endl;
 
     //------------------------
+    //Test composition matrice
+    Matrix33d m10 = {1,1,1,2,2,2,3,3,3};
+    Matrix33d m11 = {1,4,5,3,5,6,1,2,3};
+    Matrix33d m12 = m10*m11;
+    assert(m12[0][0]==5);
+    assert(m12[0][1]==11);
+    assert(m12[0][2]==14);
+    assert(m12[1][0]==10);
+    assert(m12[1][1]==22);
+    assert(m12[1][2]==28);
+    assert(m12[2][0]==15);
+    assert(m12[2][1]==33);
+    assert(m12[2][2]==42);
+    std::cout << "Test composition matrice : PASSED" <<  std::endl;
+
+    //------------------------
     //Test Display
     Matrix33d m = {1,45,3,0,4,8,9,7,42};
     std::cout << "Test Display : \n" <<m <<  std::endl;
