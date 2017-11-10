@@ -31,8 +31,9 @@ public:
     static Matrix33d identity();
 
     Array<double,DIM> operator[](const int index) const;
-    Matrix33d operator*(const Vec3d& v);//
+    Array<double,DIM>& operator[](const int index);
 
+    Matrix33d operator*(const Vec3d& v);//
     Matrix33d inverse();
 
 

@@ -3,6 +3,12 @@
 
 int main()
 {
+    Array<double,3> a1 = Array<double,3>();
+    assert(a1[0] == 0);
+    assert(a1[1] == 0);
+    assert(a1[2] == 0);
+    std::cout << "Test contructor array empty : PASSED" << std::endl;
+
     //------------------------
     //Test Constructor
     Matrix33d m1 = Matrix33d();
@@ -52,9 +58,18 @@ int main()
 
     //------------------------
     //Test Inverse
-    Matrix33d m4 = m2;
-    m4[0][0]=2.;
-    std::cout << m4 <<std::endl;
+    Matrix33d m4 ={1,2,3,0,1,4,5,6,0};
+    m4 = m4.inverse();
+    assert(m4[0][0] == -24);
+    assert(m4[0][1] == 18);
+    assert(m4[0][2] == 5);
+    assert(m4[1][0] == 20);
+    assert(m4[1][1] == -15);
+    assert(m4[1][2] == -4);
+    assert(m4[2][0] == -5);
+    assert(m4[2][1] == 4);
+    assert(m4[2][2] == 1);
+    std::cout << "Test inverse : PASSED"<<  std::endl;
 
 
     //------------------------
