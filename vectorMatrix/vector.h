@@ -7,7 +7,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include "../InterfaceCSG/Array.h"
+#include "array.h"
 #include <assert.h>
 #include <iostream>
 
