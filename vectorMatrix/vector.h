@@ -122,7 +122,7 @@ public :
     /**
      * @brief cross product for dimension 3
      */
-    typename std::enable_if<(D==3), Vector<D,T>>::type cross(const Vector<D,T>& u,const Vector<D,T>& v);
+    //typename std::enable_if<(D==3), Vector<D,T>>::type cross(const Vector<D,T>& u,const Vector<D,T>& v);
 
     /**
      * @brief operator <<, display vector object

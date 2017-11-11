@@ -43,12 +43,12 @@ public:
     static Matrix33d scale(const double sx,const double sy);
 
     Matrix33d setRotation(const Matrix33d& m);
-    Matrix33d applyRotation(const Matrix33d& m);
+    Matrix33d applyRotation(Matrix33d& m);
 
     Matrix33d setScale(const Matrix33d& m);
-    Matrix33d applyScale(const Matrix33d& m);
+    Matrix33d applyScale(Matrix33d& m);
 
-
+    Vec3d operator*(const Vec2d& v);
 
     inline friend std::ostream& operator<<(std::ostream& os, const Matrix33d& m){
        for(int i=0;i<3;i++){

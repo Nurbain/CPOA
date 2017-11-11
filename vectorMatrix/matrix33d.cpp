@@ -119,18 +119,28 @@ Matrix33d Matrix33d::operator*(const Matrix33d& m){
 }
 
 
-Matrix33d setRotation(const Matrix33d& m){
-
+Matrix33d Matrix33d::setRotation(const Matrix33d& m){
+    (*this) = m;
+    return (*this);
 }
 
-Matrix33d applyRotation(const Matrix33d& m){
-
+Matrix33d Matrix33d::applyRotation(Matrix33d &m){
+    (*this) = m*(*this);
+    return (*this);
 }
 
-Matrix33d setScale(const Matrix33d& m){
-
+Matrix33d Matrix33d::setScale(const Matrix33d& m){
+    (*this) = m;
+    return (*this);
 }
 
-Matrix33d applyScale(const Matrix33d& m){
+Matrix33d Matrix33d::applyScale(Matrix33d& m){
+    (*this) = m*(*this);
+    return (*this);
+}
 
+Vec3d Matrix33d::operator*(const Vec2d& v){
+    Vec3d newVec = {v[0],v[1],1};
+    newVec = (*this)*newVec;
+    return newVec;
 }
