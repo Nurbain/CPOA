@@ -23,7 +23,7 @@ int main()
     assert(v2[0] == 1);
     assert(v2[1] == 2);
     assert(v2[2] == 3);
-    std::cout << "Operator = : PASSED" << std::endl;
+    std::cout << "Operator = : PASSED (checked but implement in Array) " << std::endl;
 
     //------------------------
     //Test equality
@@ -32,7 +32,7 @@ int main()
     bool resultBis = v2Bis==v1;
     assert(result == 1);
     assert(resultBis == 0);
-    std::cout << "Operator == : PASSED" << std::endl;
+    std::cout << "Operator == : PASSED (checked but implement in Array) " << std::endl;
 
     //------------------------
     //Test Sum
@@ -95,9 +95,9 @@ int main()
     //Test Scalar Product
     Vec3d v7 = {2,2,2};
     Vec3d v8 = {1,2,3};
-    double resultatScalaire = scalar_product(v7,v8);
+    double resultatScalaire = v7*v8;
     assert(resultatScalaire == 12);
-    std::cout << "Function Scalar product : PASSED" << std::endl;
+    std::cout << "* dot product : PASSED" << std::endl;
 
     //------------------------
     //Test V = 0.5*V
@@ -115,11 +115,17 @@ int main()
     assert(v11[0] == -45);
     assert(v11[1] == -26);
     assert(v11[2] == 23);
-    std::cout << "Test Cross product : PASSED" << std::endl;
+    std::cout << "Test Cross product 3D: PASSED" << std::endl;
+
+    Vec2d v21 = {2,3};
+    Vec2d v22 = {4,5};
+    double resultCross2D = cross(v21,v22);
+    assert(resultCross2D == -2);
+    std::cout << "Test Cross product 2D: PASSED" << std::endl;
 
     //------------------------
     //Display Test
-    std::cout <<"v11 = " << v11 << std::endl;
+    std::cout <<"Display v11 = " << v11 << std::endl;
 
 	return 0;
 

@@ -39,20 +39,6 @@ public :
     }
 
     /**
-     * @brief operator =, affectation by copy
-     * @param v, vector with same Dimension and Type
-     * @return Vector&
-     */
-    Vector& operator=(const Vector& v);
-
-    /**
-     * @brief operator ==, verification of eguality
-     * @param v, vector with same Dimension and Type
-     * @return true if vector equals
-     */
-    bool operator==(const Vector& v);
-
-    /**
      * @brief operator +, sum with a vector for a third vector
      * @param v, vector with same Dimension and Type
      * @return  new sum of the 2 vector
@@ -107,22 +93,11 @@ public :
     void operator/=(double f);
 
     /**
-     * @brief scalar_product, compute the scalar product beetween 2 vector of same D and T
-     * @param v, vector
-     * @param u, vector
-     * @return T number
+     * @brief operator *, dot product
+     * @param v, second vecteur for product
+     * @return T , dot
      */
-    T scalar_product(const Vector& v, const Vector& u);
-
-    /**
-     * @brief cross product for dimension 2
-     */
-    //typename std::enable_if<(D==2), Vector<D,T>>::type cross(const Vector<D,T>& u,const Vector<D,T>& v);
-
-    /**
-     * @brief cross product for dimension 3
-     */
-    //typename std::enable_if<(D==3), Vector<D,T>>::type cross(const Vector<D,T>& u,const Vector<D,T>& v);
+    T operator*(const Vector& v);
 
     /**
      * @brief operator <<, display vector object
