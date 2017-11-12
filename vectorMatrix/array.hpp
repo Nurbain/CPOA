@@ -1,7 +1,6 @@
 /**
  * @author Nathan URBAIN
- * @date 06/09/2017
- * @code fonctions Array.h
+ * @date 3/11/2017
  */
 
 #ifndef ARRAY_HPP
@@ -9,34 +8,18 @@
 
 #include "array.h"
 
+// ---------------------------------------------------------------------
+// Toute explicattions des différentes fonctions sont faites dans le .h
+// Les tests d'Array sont présent dans le fichier testMatrix.cpp
+// ---------------------------------------------------------------------
 
-/**
- * @brief Constructeur
- */
+
+
 template<typename T, int N>
 Array<T,N>::Array(){
     for(int i=0; i<N; i++){
         data[i] = T(0);
     }
-}
-
-/**
- * @brief   methode qui return l'element d'index donné
- * @return  {T}  element du tableau
- */
-template<typename T, int N>
-T Array<T,N>::operator[](const int index) const{
-    return data[index];
-}
-
-
-/**
- * @brief   methode qui return l'element d'index donné
- * @return  {T&} adresse de l'element du tableau
- */
-template<typename T, int N>
-T& Array<T,N>::operator[](const int index){
-    return data[index];
 }
 
 template<typename T, int N>
@@ -47,19 +30,23 @@ Array<T,N> Array<T,N>::operator=(const Array<T,N>& tab){
     return *this;
 }
 
-/**
- * @brief   methode qui return data
- * @return  {T*}
- */
+template<typename T, int N>
+T Array<T,N>::operator[](const int index) const{
+    return data[index];
+}
+
+
+template<typename T, int N>
+T& Array<T,N>::operator[](const int index){
+    return data[index];
+}
+
 template<typename T, int N>
 const T* Array<T,N>::get_ptr() const{
     return data;
 }
 
-/**
- * @brief   methode qui verifie si le tableau est identique a celui donné
- * @return  {bool}
- */
+
 template<typename T, int N>
 bool Array<T,N>::operator==(const Array<T,N>& tab){
     for(int i =0;i<N;i++){
@@ -70,10 +57,6 @@ bool Array<T,N>::operator==(const Array<T,N>& tab){
     return true;
 }
 
-/**
- * @brief   methode qui verifie si le tableau est différent a celui donné
- * @return  {bool}
- */
 template<typename T, int N>
 bool Array<T,N>::operator!=(const Array<T,N>& tab){
 
@@ -85,17 +68,14 @@ bool Array<T,N>::operator!=(const Array<T,N>& tab){
     return false;
 }
 
-/**
- * @brief   methode qui echange avec le tableau donné
- * @return  {bool}, vrai si opération réussi
- */
+//Fonction pouvant etre appellé sans instanciation d'un objet Array
 template<typename T, int N>
-Array<T,N> Array<T,N>::switchArray(const Array<T,N>& tab){
-    Array<T,N> newArray = Array();
+void switchArray(Array<T,N>& tab1, Array<T,N>& tab2){
     for(int i=0;i<N;i++){
-        newArray[i]=tab[i];
+            T tmp = tab1[i];
+            tab1[i] = tab2[i];
+            tab2[i] = tmp;
     }
-    return newArray;
 }
 
 

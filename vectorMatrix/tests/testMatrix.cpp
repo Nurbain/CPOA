@@ -3,11 +3,49 @@
 
 int main()
 {
-    Array<double,3> a1 = Array<double,3>();
+    //------------------------
+    //         TEST ARRAY
+    //------------------------
+
+    //  Test Constructor
+
+    Array<double,2> a1 = Array<double,2>();
     assert(a1[0] == 0);
     assert(a1[1] == 0);
-    assert(a1[2] == 0);
     std::cout << "Test contructor array empty : PASSED" << std::endl;
+
+    Array<double,2> a2 = {1,2};
+    assert(a2[0] == 1);
+    assert(a2[1] == 2);
+    std::cout << "Test contructor by list : PASSED" << std::endl;
+
+    // Test affectation
+    Array<double,2> a3 = a2;
+    assert(a2[0] == 1);
+    assert(a2[1] == 2);
+    std::cout << "Test affectation : PASSED" << std::endl;
+
+    // Test accesseurs
+    a3[0] = 5;
+    assert(a3[0] == 5);
+    assert(a3[1] == 2);
+    std::cout << "Test accesseurs : PASSED" << std::endl;
+
+    // Test egalité
+    Array<double,2> a4 = a3;
+    assert(a3 == a4);
+    std::cout << "Test Egalité : PASSED" << std::endl;
+
+    a4[0] = 0;
+    assert(a3[0] != a4[0]);
+    std::cout << "Test Différence : PASSED" << std::endl;
+
+    Array<double,1> a5 = {2};
+    Array<double,1> a6 = {5};
+    switchArray(a5,a6);
+    assert(a5[0]==5);
+    assert(a6[0]==2);
+    std::cout << "Test Switch Array : PASSED" << std::endl;
 
     //------------------------
     //Test Constructor
