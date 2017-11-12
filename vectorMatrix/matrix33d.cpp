@@ -1,4 +1,16 @@
+/**
+ * @author Nathan Urbain
+ * @date 08/11
+ * @file Matrix33d function implement
+ */
+
 #include "matrix33d.h"
+
+// ---------------------------------------------------------------------
+// All explications for functions are in the file matrix33d.h
+// Matrix33d's test are in the file testMatrix.cpp
+// ---------------------------------------------------------------------
+
 
 Matrix33d::Matrix33d(){
     for(int i=0; i<DIM;i++){
@@ -21,7 +33,6 @@ Matrix33d& Matrix33d::operator=(const Matrix33d& m){
             (*this)[i][j] = m[i][j];
         }
     }
-
     return *this;
 }
 
@@ -119,22 +130,26 @@ Matrix33d Matrix33d::operator*(const Matrix33d& m){
 }
 
 
-Matrix33d Matrix33d::setRotation(const Matrix33d& m){
-    (*this) = m;
+Matrix33d Matrix33d::setRotation(double angle){
+    (*this) = Matrix33d::rotation(angle);
     return (*this);
 }
 
-Matrix33d Matrix33d::applyRotation(Matrix33d &m){
+Matrix33d Matrix33d::applyRotation(double angle){
+    Matrix33d m;
+    m.setRotation(angle);
     (*this) = m*(*this);
     return (*this);
 }
 
-Matrix33d Matrix33d::setScale(const Matrix33d& m){
-    (*this) = m;
+Matrix33d Matrix33d::setScale(double sx, double sy){
+    (*this) = Matrix33d::scale(sx,sy);
     return (*this);
 }
 
-Matrix33d Matrix33d::applyScale(Matrix33d& m){
+Matrix33d Matrix33d::applyScale(double sx, double sy){
+    Matrix33d m;
+    m.setScale(sx,sy);
     (*this) = m*(*this);
     return (*this);
 }
@@ -143,4 +158,12 @@ Vec3d Matrix33d::operator*(const Vec2d& v){
     Vec3d newVec = {v[0],v[1],1};
     newVec = (*this)*newVec;
     return newVec;
+}
+
+bool Matrix33d::operator==(const Matrix33d& m){
+    for(int i=0;i<DIM;i++){
+        if((*this)[i]!=m[i])
+            return false;
+    }
+    return true;
 }
