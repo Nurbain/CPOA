@@ -7,7 +7,7 @@
 #define IMAGE2GREY_H
 
 #include "image2D.h"
-#include <vector.h>
+#include "../vectorMatrix/vector.h"
 
 /**
  * @class Image2Grey
@@ -69,10 +69,17 @@ public:
     Image2Grey cropping(const int Ax, const int Ay, const int Bx, const int By);
 
     /**
-     * @brief GradientSobel, compute a sobel image
+     * @brief GradientSobel5, compute a sobel image who look 24 pixel around
      * @return new sobel image
      */
-    Image2D<Vec2d> GradientSobel();
+    Image2D<Vec2d> GradientSobel5();
+
+
+    /**
+     * @brief GradientSobel3, compute a sobel image who look 8 pixel around
+     * @return new sobel image
+     */
+    Image2D<Vec2d> GradientSobel3();
 
     /**
      * @brief makeSobel

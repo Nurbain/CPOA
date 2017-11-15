@@ -8,7 +8,7 @@
 
 
 #include "image2D.h"
-#include "vector.h"
+#include "../vectorMatrix/vector.h"
 
 /**
  * @class Image2RGB

@@ -8,7 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include <math.h>
-#include <vector.h>
+#include "../vectorMatrix/vector.h"
 
 // ---------------------------------------------------------------------
 // Toute explicattions des différentes fonctions sont faites dans le .h
@@ -222,7 +222,7 @@ Image2Grey Image2Grey::cropping(const int Ax, const int Ay, const int Bx, const 
 }
 
 
-Image2D<Vec2d> Image2Grey::GradientSobel()
+Image2D<Vec2d> Image2Grey::GradientSobel5()
 {
     Image2D<Vec2d> newImg = Image2D<Vec2d>(height, width);
 
@@ -247,10 +247,11 @@ Image2D<Vec2d> Image2Grey::GradientSobel()
             int X_convo = 0;
             int indexX_convo = 0;
 
-            for(int x = std::max(0, j - 2); x < std::min(j + 2, width); x++)
+            for(int x = j - 2; x < j + 2; x++)
             {
-                for(int y = std::max(0, i - 2); y < std::min(i + 2, height); y++)
+                for(int y = i - 2; y < i + 2; y++)
                 {
+                    //Calcule le gradient x
                     X_convo += (*this)(x, y) * Sobel5x[indexX_convo];
                     indexX_convo++;
                 }
@@ -260,10 +261,11 @@ Image2D<Vec2d> Image2Grey::GradientSobel()
             int Y_convo = 0;
             int indexY_convo = 0;
 
-            for(int x = std::max(0, j - 2); x < std::min(j + 2, width); x++)
+            for(int x = j - 2; x < j + 2; x++)
             {
-                for(int y = std::max(0, i - 2); y < std::min(i + 2, height); y++)
+                for(int y = i - 2; y < i + 2; y++)
                 {
+                    //Calcule le gradient y
                     Y_convo += (*this)(x, y) * Sobel5y[indexY_convo];
                     indexY_convo++;
                 }
@@ -277,13 +279,71 @@ Image2D<Vec2d> Image2Grey::GradientSobel()
     return newImg;
 }
 
+Image2D<Vec2d> Image2Grey::GradientSobel3(){
+    Image2D<Vec2d> newImg = Image2D<Vec2d>(height, width);
+
+    const int Sobel3x[9]={-1, 0, 1,
+                         -2, 0 ,2,
+                         -1, 0, 1};
+
+    const int Sobel3y[9]={-1, -2, -1,
+                         0, 0, 0,
+                         1, 2, 1};
+
+
+        for(int j = 1; j < width -1 ; j++)
+        {
+            for(int i = 1; i < height -1 ; i++)
+            {
+            // X convolution computing
+            double X_convo = 0;
+            int indexX_convo = 8;
+
+            for(int x = j - 1; x < j + 1; x++)
+            {
+                for(int y = i - 1; y < i + 1; y++)
+                {
+                    //Calcule le gradient x
+                    X_convo += (*this)(x, y) * Sobel3x[indexX_convo];
+                    indexX_convo--;
+                }
+            }
+
+            // Y convolution computing
+            double Y_convo = 0;
+            int indexY_convo = 8;
+
+            for(int x = j - 1; x < j + 1; x++)
+            {
+                for(int y = i - 1; y < i + 1; y++)
+                {
+                    //Calcule le gradient Y
+                    Y_convo += (*this)(x, y) * Sobel3y[indexY_convo];
+                    indexY_convo--;
+                }
+            }
+
+           newImg(j, i)[0] = X_convo;
+           newImg(j, i)[1] = Y_convo;
+        }
+    }
+
+    return newImg;
+}
+
 Image2Grey Image2Grey::makeSobel(const Image2D<Vec2d>&  gradientSobel){
 
     Image2Grey sobelImg = Image2Grey(height,width);
 
     for(int i=0;i<height;i++){
         for(int j=0;j<width;j++){
-            sobelImg(j,i) = sqrt( pow(gradientSobel(j,i)[0],2) + pow(gradientSobel(j,i)[1],2) );
+            int value = sqrt( gradientSobel(j,i)[0]*gradientSobel(j,i)[0] + gradientSobel(j,i)[1]*gradientSobel(j,i)[1] );
+            if(value < 0)
+                value = 0;
+            if(value > 255)
+                value = 255;
+
+            sobelImg(j,i) = (unsigned char)value;
         }
     }
 
