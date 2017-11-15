@@ -286,6 +286,8 @@ int main()
     std::cout << "Test Cropping : PASSED"  << std::endl;
 
 
+    Image2D<Vec2d> testGradient = test2.GradientSobel();
+
     //------------------------
     //         TEST IMAGE RGB
     //------------------------

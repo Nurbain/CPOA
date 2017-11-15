@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include <math.h>
+#include <vector.h>
 
 // ---------------------------------------------------------------------
 // Toute explicattions des différentes fonctions sont faites dans le .h
@@ -214,6 +215,61 @@ Image2Grey Image2Grey::cropping(const int Ax, const int Ay, const int Bx, const 
     for(int i= Ax; i < Bx ; i++){
         for(int j=Ay; j<By ;j++){
             newImg(i-Ax,j-Ay) = (*this)(i,j);
+        }
+    }
+
+    return newImg;
+}
+
+
+Image2D<Vec2d> Image2Grey::GradientSobel()
+{
+    Image2D<Vec2d> newImg = Image2D<Vec2d>(height, width);
+
+    const int Sobel5x[25]={1,2,0,-2,-1,
+                                          4,8,0,-8,-4,
+                                          6,12,0,-12,-6,
+                                          4,8,0,-8,-4,
+                                          1,2,0,-2,-1};
+
+    const int Sobel5y[25]={1, 4, 6, 4, 1,
+                                          2, 8, 12, 8, 2,
+                                          0, 0, 0, 0, 0,
+                                          -2,-8,-12,-8,-2,
+                                          -1,-4,-6,-4,-1};
+
+    for(int i = 0; i < height; i++)
+    {
+        for(int j = 0; j < width; j++)
+        {
+            // X convolution computing
+            int X_convo = 0;
+            int indeX_convo = 0;
+
+            for(int x = std::max(0, j - 2); x < std::min(j + 2, width); x++)
+            {
+                for(int y = std::max(0, i - 2); y < std::min(i + 2, width); y++)
+                {
+                    X_convo += (*this)(x, y) * Sobel5x[indeX_convo];
+                    indeX_convo++;
+                }
+            }
+
+            // Y convolution computing
+            int Y_convo = 0;
+            indeX_convo = 0;
+
+            for(int x = std::max(0, i - 2); x < std::min(i + 2, height); x++)
+            {
+                for(int y = std::max(0, j - 2); y < std::min(j + 2, width); y++)
+                {
+                    Y_convo += (*this)(y, x) * Sobel5y[indeX_convo];
+                    indeX_convo++;
+                }
+            }
+
+           newImg(j, i)[0] = X_convo;
+           newImg(j, i)[1] = Y_convo;
         }
     }
 

@@ -7,7 +7,7 @@
 #define IMAGE2GREY_H
 
 #include "image2D.h"
-
+#include <vector.h>
 
 /**
  * @class Image2Grey
@@ -67,6 +67,12 @@ public:
      * @return new Image2Grey
      */
     Image2Grey cropping(const int Ax, const int Ay, const int Bx, const int By);
+
+    /**
+     * @brief GradientSobel, compute a sobel image
+     * @return new sobel image
+     */
+    Image2D<Vec2d> GradientSobel();
 };
 
 #endif

@@ -129,5 +129,4 @@ auto convol3x3(Image2D<P>& image, const double* m) -> typename std::enable_if<st
     image.swap_pixels(im);
 }
 
-
 #endif

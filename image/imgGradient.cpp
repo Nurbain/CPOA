@@ -1,9 +1,13 @@
-//#include "imgGradient.h"
+
+//---------------------------------------------------------
+//           VOIR GradientSobel FONCTION IN IMAGE2GREY
+//---------------------------------------------------------
+
+
+/*#include "imgGradient.h"
 
 
 
-
-/*
 const int GradientSobel::Sobel5x[25]={1,2,0,-2,-1,
 									  4,8,0,-8,-4,
 									  6,12,0,-12,-6,
@@ -27,4 +31,3 @@ Image2<Vec2f> GradientSobel::gradient55(const Image2grey& img_in)
 {
 }
 */
-
