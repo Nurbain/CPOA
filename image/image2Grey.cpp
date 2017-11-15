@@ -11,7 +11,7 @@
 
 // ---------------------------------------------------------------------
 // Toute explicattions des différentes fonctions sont faites dans le .h
-// Les tests d'image2D sont présent dans le fichier testMatrix.cpp
+// Les tests d'image2Grey sont présent dans le fichier testMatrix.cpp
 // ---------------------------------------------------------------------
 
 int Image2Grey::loadToPGM(const char* path){
@@ -164,6 +164,7 @@ Image2Grey Image2Grey::smoothing(int nbr)
         for(int j = 0; j < width; j++){
             int moyenne = 0;
 
+            // max to verifie if we don't go outside the image
             for(int x = std::max(0, i - nbr); x < std::min(i + nbr, height); x++){
                 for(int y = std::max(0, j - nbr); y < std::min(j + nbr, width); y++){
                     moyenne += (*this)(y, x);

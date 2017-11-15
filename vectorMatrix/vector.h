@@ -125,6 +125,7 @@ using Vec2d = Vector<2,double>;
 using Vec3d = Vector<3,double>;
 using Vec4d = Vector<4,double>;
 
+using Vec3uc = Vector<3,unsigned char>;
 
 #include "vector.hpp"
 

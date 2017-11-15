@@ -2,6 +2,7 @@
 #include "matrix33d.h"
 #include "../image/image2D.h"
 #include "../image/image2Grey.h"
+#include "../image/Image2RGB.h"
 
 int main()
 {
@@ -285,9 +286,36 @@ int main()
     std::cout << "Test Cropping : PASSED"  << std::endl;
 
 
+    //------------------------
+    //         TEST IMAGE RGB
+    //------------------------
+
+
+    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/rgbTest.ppm";
+    Image2RGB testRGB = Image2RGB(400,400);
+    testRGB.loadToRGB(path);
+
+     path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/rgbTestSave.ppm";
+     testRGB.saveToRGB(path);
+
+     Image2RGB testRGB2 = Image2RGB(400,400);
+     testRGB2.loadToRGB(path);
+
+     for(int i = 0; i<testRGB.getWidth();i++){
+         for(int j = 0; j<testRGB.getHeight();j++){
+             assert(testRGB2(i,j)==testRGB(i,j));
+         }
+     }
+
+    std::cout << "Test Save Load RGB : PASSED \n"<<  std::endl;
+
+
+
     std::cout << "\nALL TEST MATRIX PASSED"<<  std::endl;
     //------------------------
-    std::cout << "ALL TEST IMAGE2GREY PASSED \n"<<  std::endl;
+    std::cout << "ALL TEST IMAGE2GREY PASSED"<<  std::endl;
+    //------------------------
+    std::cout << "ALL TEST IMAGE2RGB PASSED \n"<<  std::endl;
 
 
 
