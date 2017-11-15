@@ -1,3 +1,6 @@
+#CPOA PROJECT
+#AUTHOR NATHAN URBAIN
+
 cmake_minimum_required(VERSION 3.0)
 
 project(Projet_Particules LANGUAGES C CXX)
