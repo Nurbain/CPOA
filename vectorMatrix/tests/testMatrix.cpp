@@ -1,54 +1,10 @@
 #include <iostream>
 #include "matrix33d.h"
+#include "../image/image2D.h"
+#include "../image/image2Grey.h"
 
 int main()
 {
-    //------------------------
-    //         TEST ARRAY
-    //------------------------
-
-    //  Test Constructor
-
-    Array<double,2> a1 = Array<double,2>();
-    assert(a1[0] == 0);
-    assert(a1[1] == 0);
-    std::cout << "Test contructor array empty : PASSED" << std::endl;
-
-    Array<double,2> a2 = {1,2};
-    assert(a2[0] == 1);
-    assert(a2[1] == 2);
-    std::cout << "Test contructor by list : PASSED" << std::endl;
-
-    // Test affectation
-    Array<double,2> a3 = a2;
-    assert(a2[0] == 1);
-    assert(a2[1] == 2);
-    std::cout << "Test affectation : PASSED" << std::endl;
-
-    // Test accesseurs
-    a3[0] = 5;
-    assert(a3[0] == 5);
-    assert(a3[1] == 2);
-    std::cout << "Test accesseurs : PASSED" << std::endl;
-
-    // Test egalité
-    Array<double,2> a4 = a3;
-    assert(a3 == a4);
-    std::cout << "Test Egalité : PASSED" << std::endl;
-
-    a4[0] = 0;
-    assert(a3[0] != a4[0]);
-    std::cout << "Test Différence : PASSED" << std::endl;
-
-    Array<double,1> a5 = {2};
-    Array<double,1> a6 = {5};
-    switchArray(a5,a6);
-    assert(a5[0]==5);
-    assert(a6[0]==2);
-    std::cout << "Test Switch Array : PASSED" << std::endl;
-
-
-
     //---------------------------
     //         TEST MATRIX33D
     //---------------------------
@@ -260,7 +216,79 @@ int main()
     std::cout << "Test Display : \n" <<m <<  std::endl;
 
     //------------------------
-    std::cout << "ALL TEST PASSED \n"<<  std::endl;
+    std::cout << "\n ALL TEST MATRIX PASSED \n"<<  std::endl;
+
+
+
+    //------------------------
+    //         TEST IMAGE
+    //------------------------
+
+
+    //--------------------------------------
+    // Test Save et Load
+
+    Image2Grey test = Image2Grey(400,400);
+    const char* path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/test.pgm";
+    test.loadToPGM(path);
+
+    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/save.pgm";
+    test.saveToPGM(path);
+
+    Image2Grey test2 = Image2Grey(400,400);
+    test2.loadToPGM(path);
+    for(int i = 0; i<test.getWidth();i++){
+        for(int j = 0; j<test.getHeight();j++){
+            assert(test(i,j) == test2(i,j));
+        }
+    }
+    std::cout << "Test Load et Save  : PASSED" << std::endl;
+
+    //---------------------------------------------------------
+    // Test Tresholding
+
+    int TresholdingVal = 170;
+    Image2Grey test3 = test2.thresholding(TresholdingVal);
+    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/thresholding.pgm";
+
+    for(int i = 0; i<test3.getWidth();i++){
+        for(int j = 0; j<test3.getHeight();j++){
+            assert(test3(i,j) == 0 || test3(i,j) == 255);
+        }
+    }
+
+    test3.saveToPGM(path);
+    std::cout << "Test Tresholding : PASSED" << std::endl;
+
+    //---------------------------------------------------------
+    // Test Sampling
+    Image2Grey test4 = test2.sampling();
+    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/sampling.pgm";
+    test4.saveToPGM(path);
+
+    std::cout << "Test Sampling : PASSED" << std::endl;
+
+    //---------------------------------------------------------
+    // Test Smooting
+    Image2Grey test5 = test2.smoothing(3);
+    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/smoothing.pgm";
+    test5.saveToPGM(path);
+
+    std::cout << "Test Smoothing : PASSED" << std::endl;
+
+    //---------------------------------------------------------
+    // Test Cropping
+    Image2Grey test6 = test2.cropping(175,85,390,300);
+    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/cropping.pgm";
+    test6.saveToPGM(path);
+
+    std::cout << "Test Cropping : PASSED"  << std::endl;
+
+
+    std::cout << "\nALL TEST MATRIX PASSED"<<  std::endl;
+    //------------------------
+    std::cout << "ALL TEST IMAGE2GREY PASSED \n"<<  std::endl;
+
 
 
     return 0;

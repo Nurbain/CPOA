@@ -25,4 +25,5 @@ add_subdirectory(tests)
 target_link_libraries(${PROJECT_NAME}
         debug gtestd optimized gtest
         debug gmockd optimized gmock
-        ${CMAKE_THREAD_LIBS_INIT})
+        ${CMAKE_THREAD_LIBS_INIT}
+        image)

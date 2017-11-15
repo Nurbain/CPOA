@@ -1,6 +1,8 @@
 //#include "imgGradient.h"
 
 
+
+
 /*
 const int GradientSobel::Sobel5x[25]={1,2,0,-2,-1,
 									  4,8,0,-8,-4,
