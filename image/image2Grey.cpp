@@ -172,7 +172,7 @@ Image2Grey Image2Grey::smoothing(int nbr)
                 }
             }
 
-            moyenne /= std::pow(2*nbr + 1, 2);
+            moyenne /= pow(2*nbr + 1, 2);
 
             smoothed(j, i) = (unsigned char)moyenne;
         }
@@ -184,24 +184,24 @@ Image2Grey Image2Grey::smoothing(int nbr)
 
 Image2Grey Image2Grey::sampling(){
     int newWidth = width/2;
-    int newHeight = height/2;
+        int newHeight = height/2;
 
 
-    if(newWidth % 2 != 0){
-        newWidth--;
-    }
-    if(newHeight % 2 != 0){
-        newHeight--;
-    }
-
-
-    Image2Grey newImage = Image2Grey(newHeight,newWidth);
-
-    for(int j=0;j<height-1;j=j+2){
-        for(int i=0;i<width-1;i=i+2){
-            newImage(i/2,j/2) = (*this)(i,j);
+        if(newWidth % 2 != 0){
+            newWidth--;
         }
-    }
+        if(newHeight % 2 != 0){
+            newHeight--;
+        }
+
+
+        Image2Grey newImage = Image2Grey(newHeight,newWidth);
+
+        for(int j=0;j<height-2;j=j+2){
+            for(int i=0;i<width-2;i=i+2){
+                newImage(i/2,j/2) = (*this)(i,j);
+            }
+        }
     return newImage;
 }
 
@@ -268,10 +268,23 @@ Image2D<Vec2d> Image2Grey::GradientSobel()
                 }
             }
 
-           newImg(j, i)[0] = X_convo;
-           newImg(j, i)[1] = Y_convo;
+           newImg(j, i)[0] = X_convo/25;
+           newImg(j, i)[1] = Y_convo/25;
         }
     }
 
     return newImg;
+}
+
+Image2Grey Image2Grey::makeSobel(const Image2D<Vec2d>&  gradientSobel){
+
+    Image2Grey sobelImg = Image2Grey(height,width);
+
+    for(int i=0;i<height;i++){
+        for(int j=0;j<width;j++){
+            sobelImg(j,i) = sqrt( pow(gradientSobel(j,i)[0],2) + pow(gradientSobel(j,i)[1],2) );
+        }
+    }
+
+    return sobelImg;
 }

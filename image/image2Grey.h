@@ -73,6 +73,13 @@ public:
      * @return new sobel image
      */
     Image2D<Vec2d> GradientSobel();
+
+    /**
+     * @brief makeSobel
+     * @param gradientSobel
+     * @return
+     */
+    Image2Grey makeSobel(const Image2D<Vec2d>&  gradientSobel);
 };
 
 #endif

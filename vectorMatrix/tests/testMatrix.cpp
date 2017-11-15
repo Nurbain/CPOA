@@ -3,6 +3,7 @@
 #include "../image/image2D.h"
 #include "../image/image2Grey.h"
 #include "../image/Image2RGB.h"
+#include "unistd.h"
 
 int main()
 {
@@ -228,16 +229,18 @@ int main()
 
     //--------------------------------------
     // Test Save et Load
+    std::string Currentpath = get_current_dir_name();
+    std::cout << get_current_dir_name()<<  std::endl;
+
+    Currentpath +=  "/../../../CPOA/image";
 
     Image2Grey test = Image2Grey(400,400);
-    const char* path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/test.pgm";
-    test.loadToPGM(path);
+    test.loadToPGM((Currentpath+"/test.pgm").c_str());
 
-    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/save.pgm";
-    test.saveToPGM(path);
+    test.saveToPGM((Currentpath+"/save.pgm").c_str());
 
     Image2Grey test2 = Image2Grey(400,400);
-    test2.loadToPGM(path);
+    test2.loadToPGM((Currentpath+"/save.pgm").c_str());
     for(int i = 0; i<test.getWidth();i++){
         for(int j = 0; j<test.getHeight();j++){
             assert(test(i,j) == test2(i,j));
@@ -250,7 +253,6 @@ int main()
 
     int TresholdingVal = 170;
     Image2Grey test3 = test2.thresholding(TresholdingVal);
-    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/thresholding.pgm";
 
     for(int i = 0; i<test3.getWidth();i++){
         for(int j = 0; j<test3.getHeight();j++){
@@ -258,50 +260,46 @@ int main()
         }
     }
 
-    test3.saveToPGM(path);
+    test3.saveToPGM((Currentpath + "/thresholding.pgm").c_str());
     std::cout << "Test Tresholding : PASSED" << std::endl;
 
     //---------------------------------------------------------
     // Test Sampling
     Image2Grey test4 = test2.sampling();
-    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/sampling.pgm";
-    test4.saveToPGM(path);
+    test4.saveToPGM((Currentpath + "/sampling.pgm").c_str());
 
     std::cout << "Test Sampling : PASSED" << std::endl;
 
     //---------------------------------------------------------
-    // Test Smooting
+   // Test Smooting
     Image2Grey test5 = test2.smoothing(3);
-    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/smoothing.pgm";
-    test5.saveToPGM(path);
+    test5.saveToPGM((Currentpath + "/smoothing.pgm").c_str());
 
     std::cout << "Test Smoothing : PASSED" << std::endl;
 
     //---------------------------------------------------------
     // Test Cropping
     Image2Grey test6 = test2.cropping(175,85,390,300);
-    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/cropping.pgm";
-    test6.saveToPGM(path);
+    test6.saveToPGM((Currentpath + "/cropping.pgm").c_str());
 
     std::cout << "Test Cropping : PASSED"  << std::endl;
 
 
-    Image2D<Vec2d> testGradient = test2.GradientSobel();
+   // Image2D<Vec2d> testGradient = test2.GradientSobel();
 
     //------------------------
     //         TEST IMAGE RGB
     //------------------------
 
 
-    path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/rgbTest.ppm";
-    Image2RGB testRGB = Image2RGB(400,400);
-    testRGB.loadToRGB(path);
 
-     path = "/home/nathan/Documents/ProjetCPOA/CPOA/image/rgbTestSave.ppm";
-     testRGB.saveToRGB(path);
+    Image2RGB testRGB = Image2RGB(400,400);
+    testRGB.loadToRGB((Currentpath + "/rgbTest.ppm").c_str());
+
+     testRGB.saveToRGB((Currentpath + "/rgbTestSave.ppm").c_str());
 
      Image2RGB testRGB2 = Image2RGB(400,400);
-     testRGB2.loadToRGB(path);
+     testRGB2.loadToRGB((Currentpath + "/rgbTestSave.ppm").c_str());
 
      for(int i = 0; i<testRGB.getWidth();i++){
          for(int j = 0; j<testRGB.getHeight();j++){
