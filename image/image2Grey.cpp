@@ -227,44 +227,45 @@ Image2D<Vec2d> Image2Grey::GradientSobel()
     Image2D<Vec2d> newImg = Image2D<Vec2d>(height, width);
 
     const int Sobel5x[25]={1,2,0,-2,-1,
-                                          4,8,0,-8,-4,
-                                          6,12,0,-12,-6,
-                                          4,8,0,-8,-4,
-                                          1,2,0,-2,-1};
+                          4,8,0,-8,-4,
+                          6,12,0,-12,-6,
+                          4,8,0,-8,-4,
+                          1,2,0,-2,-1};
 
     const int Sobel5y[25]={1, 4, 6, 4, 1,
-                                          2, 8, 12, 8, 2,
-                                          0, 0, 0, 0, 0,
-                                          -2,-8,-12,-8,-2,
-                                          -1,-4,-6,-4,-1};
+                          2, 8, 12, 8, 2,
+                          0, 0, 0, 0, 0,
+                          -2,-8,-12,-8,-2,
+                          -1,-4,-6,-4,-1};
 
-    for(int i = 0; i < height; i++)
-    {
-        for(int j = 0; j < width; j++)
+
+        for(int j = 2; j < width -2 ; j++)
         {
+            for(int i = 2; i < height -2 ; i++)
+            {
             // X convolution computing
             int X_convo = 0;
-            int indeX_convo = 0;
+            int indexX_convo = 0;
 
             for(int x = std::max(0, j - 2); x < std::min(j + 2, width); x++)
             {
-                for(int y = std::max(0, i - 2); y < std::min(i + 2, width); y++)
+                for(int y = std::max(0, i - 2); y < std::min(i + 2, height); y++)
                 {
-                    X_convo += (*this)(x, y) * Sobel5x[indeX_convo];
-                    indeX_convo++;
+                    X_convo += (*this)(x, y) * Sobel5x[indexX_convo];
+                    indexX_convo++;
                 }
             }
 
             // Y convolution computing
             int Y_convo = 0;
-            indeX_convo = 0;
+            int indexY_convo = 0;
 
-            for(int x = std::max(0, i - 2); x < std::min(i + 2, height); x++)
+            for(int x = std::max(0, j - 2); x < std::min(j + 2, width); x++)
             {
-                for(int y = std::max(0, j - 2); y < std::min(j + 2, width); y++)
+                for(int y = std::max(0, i - 2); y < std::min(i + 2, height); y++)
                 {
-                    Y_convo += (*this)(y, x) * Sobel5y[indeX_convo];
-                    indeX_convo++;
+                    Y_convo += (*this)(x, y) * Sobel5y[indexY_convo];
+                    indexY_convo++;
                 }
             }
 

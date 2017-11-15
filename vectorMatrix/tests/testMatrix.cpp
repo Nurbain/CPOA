@@ -285,7 +285,9 @@ int main()
     std::cout << "Test Cropping : PASSED"  << std::endl;
 
 
-   // Image2D<Vec2d> testGradient = test2.GradientSobel();
+    Image2D<Vec2d> testGradient = test2.GradientSobel();
+    Image2Grey test7 = test2.makeSobel(testGradient);
+    test7.saveToPGM((Currentpath + "/sobel.pgm").c_str());
 
     //------------------------
     //         TEST IMAGE RGB
