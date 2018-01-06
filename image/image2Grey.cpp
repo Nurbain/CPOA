@@ -282,11 +282,11 @@ Image2D<Vec2d> Image2Grey::GradientSobel5()
 Image2D<Vec2d> Image2Grey::GradientSobel3(){
     Image2D<Vec2d> newImg = Image2D<Vec2d>(height, width);
 
-    const int Sobel3x[9]={-1, 0, 1,
+    const double Sobel3x[9]={-1, 0, 1,
                          -2, 0 ,2,
                          -1, 0, 1};
 
-    const int Sobel3y[9]={-1, -2, -1,
+    const double Sobel3y[9]={-1, -2, -1,
                          0, 0, 0,
                          1, 2, 1};
 

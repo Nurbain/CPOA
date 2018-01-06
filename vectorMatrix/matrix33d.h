@@ -120,6 +120,7 @@ public:
      * @param v, Vec2d
      * @return Vec3d, with 1 in the third coord.
      */
+    //faire une apply qui renvoit un Vec2d
     Vec3d operator*(const Vec2d& v);
 
     /**
@@ -158,6 +159,7 @@ public:
      * @return
      */
     Matrix33d applyScale(double sx, double sy);
+
 
     /**
      * @brief operator <<, display operator

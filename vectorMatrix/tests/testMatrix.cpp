@@ -1,7 +1,8 @@
 #include <iostream>
 #include "matrix33d.h"
 #include "unistd.h"
-
+#include <vector>
+#include <algorithm>
 int main()
 {
     //---------------------------
