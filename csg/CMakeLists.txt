@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(csg LANGUAGES CXX)
 
+add_executable(csg_tests csg_tests.cpp)
+
 file ( GLOB HEADERS *.h *.hpp)
 
 file ( GLOB SOURCES *.cpp)
