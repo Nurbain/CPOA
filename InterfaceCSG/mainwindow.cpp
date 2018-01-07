@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-//#include"csgPrimitive.h"
-
 #include <QFileDialog>
 #include <QTextCursor>
 
@@ -16,9 +14,9 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-//	m_currentNode(NULL),
-//	m_prim(NULL),
-//	m_oper(NULL),
+    m_currentNode(NULL),
+    m_prim(NULL),
+    m_oper(NULL),
     m_graphTextEdit(NULL),
     m_stopSignal(false)
 

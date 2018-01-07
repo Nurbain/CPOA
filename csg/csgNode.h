@@ -17,7 +17,7 @@ public:
     //Constructeur
     csgNode(std::string label);
     csgNode(const csgNode& copy);
-    ~csgNode();
+    ~csgNode(){};
 
     std::string getLabel();
     void setLabel(std::string label);

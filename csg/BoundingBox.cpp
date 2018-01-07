@@ -1,6 +1,10 @@
 #include "BoundingBox.h"
 #include "math.h"
 
+BoundingBox::BoundingBox(){
+
+}
+
 Vec2d BoundingBox::getMin(){
     return this->pointMin;
 }

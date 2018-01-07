@@ -28,7 +28,7 @@ protected:
 
 
 public:
-
+    BoundingBox();
     BoundingBox(const float px, const float py, const float qx, const float qy) {
         pointMin = {px,py};
         pointMax = {qx,qy};
@@ -42,8 +42,6 @@ public:
         largeur = max[0] - min[0] ;
         hauteur = max[1] - min[1] ;
     }
-
-    BoundingBox();
 
     Vec2d getMin();
     void setMin(Vec2d& point);
