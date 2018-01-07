@@ -29,14 +29,14 @@ public:
      * @param path, absolute path of image's location  to save
      * @return true if done
      */
-    int saveToPGM(const char *path);
+    int saveToPGM(const std::string &path);
 
     /**
      * @brief loadToPGM, load an image given by the path
      * @param path, absolute path of image's location
      * @return true if done
      */
-    int loadToPGM(const char* path);
+    int loadToPGM(const std::string &path);
 
     /**
      * @brief thresholding, make a treshholdin on the current image

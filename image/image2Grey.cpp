@@ -15,7 +15,7 @@
 // Les tests d'image2Grey sont présent dans le fichier testMatrix.cpp
 // ---------------------------------------------------------------------
 
-int Image2Grey::loadToPGM(const char* path){
+int Image2Grey::loadToPGM(const std::string& path){
 
 
     std::ifstream is;
@@ -103,7 +103,7 @@ int Image2Grey::loadToPGM(const char* path){
 
 }
 
-int Image2Grey::saveToPGM(const char* path){
+int Image2Grey::saveToPGM(const std::string& path){
 
     std::ofstream fileOut;
     fileOut.open(path);

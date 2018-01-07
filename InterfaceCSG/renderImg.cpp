@@ -8,17 +8,17 @@
 #include "Vec2V.h"
 
 
-RenderImg::RenderImg(/*BoundingBox& bb,*/ QWidget *parent ):
+RenderImg::RenderImg(BoundingBox& box, QWidget *parent ):
     QGLWidget(QGLFormat(QGL::SampleBuffers), parent),
     m_texture(0),
     m_widthTex(0),
     m_heightTex(0),
     m_ptrTex(NULL),
-//	m_img(1024,1024),
+    m_imgGrey(1024,1024),
     m_drawSobel(false),
     m_BBdraw(false),
-    pointSource()
-//	m_BB(bb)
+    pointSource(),
+    m_BB(box)
   // Autres Inits
 {
     // Timer
@@ -28,25 +28,37 @@ RenderImg::RenderImg(/*BoundingBox& bb,*/ QWidget *parent ):
 
     // Init Vecteur, et point Source
     pointSize = 3.;
-    nbrVec = 100;
-    tabVec = new Vec2V[nbrVec]();
+    m_nbrParticule = 100;
+    tabVec = new Vec2V[m_nbrParticule]();
+
+    //Init texture parametre
+    m_widthTex=m_imgGrey.getWidth();
+    m_heightTex=m_imgGrey.getHeight();
+    m_ptrTex=m_imgGrey.getData();
 }
 
 
 void RenderImg::loadTexture(const std::string& filename)
 {
     // VOTRE CODE ICI
+    m_imgGrey.loadToPGM(filename);
+    m_widthTex=m_imgGrey.getWidth();
+    m_heightTex=m_imgGrey.getHeight();
+    m_ptrTex=m_imgGrey.getData();
 
     glBindTexture(GL_TEXTURE_2D, m_texture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, m_widthTex, m_heightTex, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-
+//On fait un save juste au cas ou ca peut servir
+void RenderImg::saveTexture(const std::string& filename){
+    m_imgGrey.saveToPGM(filename);
+}
 
 void RenderImg::updateDataTexture()
 {
-//	m_ptrTex = m_img.getDataPtr();
+    m_ptrTex = m_imgGrey.getData();
     glBindTexture(GL_TEXTURE_2D, m_texture);
     glTexSubImage2D(GL_TEXTURE_2D,0,0,0,m_widthTex, m_heightTex, GL_LUMINANCE, GL_UNSIGNED_BYTE, m_ptrTex);
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -56,12 +68,12 @@ void RenderImg::updateDataTexture()
 
 unsigned int RenderImg::getWidth()
 {
-    return 0; // RETURN IMAGE WIDTH
+    return m_widthTex;
 }
 
 unsigned int RenderImg::getHeight()
 {
-        return 0; // RETURN IMAGE HEIGHT
+    return m_heightTex;
 }
 
 RenderImg::~RenderImg()
@@ -121,13 +133,13 @@ void RenderImg::paintGL()
     if (m_drawSobel)
         drawSobel();
 
-//	if (m_BBdraw)
-//		drawBB(m_BB);
+    if (m_BBdraw)
+        drawBB(m_BB);
 
     glPointSize(pointSize);
     glColor3f(1,0,0);
     glBegin(GL_POINTS);
-    for (int i = 0; i < nbrVec; i++ )
+    for (int i = 0; i < m_nbrParticule; i++ )
     {
         glVertex2fv(tabVec[i].get_ptr());
     }
@@ -180,19 +192,17 @@ void RenderImg::mousePressEvent(QMouseEvent *event)
 
 
 
-
-
     paintGL();
 
     glPointSize(4.0f);
     glColor3f(1.0f,0,0);
     glBegin(GL_POINTS);
 
-    unsigned int nbp = 0;// VOTRE CODE ICI : nombre de particules
-    for (int i = 0; i < nbp; i++ )
+    unsigned int nbp = m_nbrParticule;// VOTRE CODE ICI : nombre de particules
+    for (unsigned int i = 0; i < nbp; i++ )
     {
         // here get back position of each particle in ptPos
-//		glVertex2f(2.0f*ptPos[0]/m_widthTex-1.0f, -2.0f*ptPos[1]/m_heightTex+1.0f);
+        glVertex2f(2.0f*m_lastPos.x()/m_widthTex-1.0f, -2.0f*m_lastPos.y()/m_heightTex+1.0f);
     }
     glEnd();
 
@@ -202,12 +212,12 @@ void RenderImg::mousePressEvent(QMouseEvent *event)
 
 void RenderImg::mouseReleaseEvent(QMouseEvent *event)
 {
-//	int x,y;
-//	coordInTexture(event, x, y);
-//	m_lastPos.setX(x);
-//	m_lastPos.setY(y);
+    int x,y;
+    coordInTexture(event, x, y);
+    m_lastPos.setX(x);
+    m_lastPos.setY(y);
 
-//	std::cout << " RELEASE in texture "<< x << " / "<< y << std::endl;
+    std::cout << " RELEASE in texture "<< x << " / "<< y << std::endl;
 
 }
 
@@ -242,7 +252,7 @@ void RenderImg::keyPressEvent(QKeyEvent* event)
 
 void RenderImg::animate()
 {
-    for(int i=0; i<nbrVec ; i++){
+    for(int i=0; i<m_nbrParticule ; i++){
         tabVec[i].avance(pointSource[0],pointSource[1]);
     }
     update();
@@ -269,6 +279,7 @@ void RenderImg::clean()
     }
 }
 
+//TODO
 void RenderImg::toggleSobel()
 {
     m_drawSobel = !m_drawSobel;
@@ -282,7 +293,7 @@ void RenderImg::toggleSobel()
     update();
 }
 
-
+//TODO
 void RenderImg::drawSobel()
 {
     glBegin(GL_LINES);
@@ -313,10 +324,10 @@ void RenderImg::drawBB(const BoundingBox& bb)
 {
     glBegin(GL_LINE_LOOP);
     glColor3f(1.0f,0.5f,0.5f);
-//	glVertex2f( xImg2GL(??), yImg2GL(??) );
-//	glVertex2f( xImg2GL(??), yImg2GL(??) );
-//	glVertex2f( xImg2GL(??), yImg2GL(??) );
-//	glVertex2f( xImg2GL(??), yImg2GL(??) );
+    glVertex2f( xImg2GL(bb.getMin()[0]), yImg2GL(bb.getMax()[1]) );
+    glVertex2f( xImg2GL(bb.getMin()[0]), yImg2GL(bb.getMax()[1]) );
+    glVertex2f( xImg2GL(bb.getMax()[0]), yImg2GL(bb.getMax()[1]) );
+    glVertex2f( xImg2GL(bb.getMax()[0]), yImg2GL(bb.getMin()[1]) );
     glEnd();
 }
 

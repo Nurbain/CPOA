@@ -43,10 +43,10 @@ public:
         hauteur = max[1] - min[1] ;
     }
 
-    Vec2d getMin();
+    Vec2d getMin() const;
     void setMin(Vec2d& point);
 
-    Vec2d getMax();
+    Vec2d getMax() const;
     void setMax(Vec2d& point);
 
     BoundingBox operator=(const BoundingBox& box); //copy

@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_render = new RenderImg();
-//	m_render = new RenderImg(this->m_bb);
+    //m_render = new RenderImg();
+    m_render = new RenderImg(this->m_bb);
 
     ui->HLayout->insertWidget(0,m_render,99);
     m_render->setFocusPolicy(Qt::ClickFocus);

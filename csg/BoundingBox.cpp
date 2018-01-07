@@ -5,20 +5,20 @@ BoundingBox::BoundingBox(){
 
 }
 
-Vec2d BoundingBox::getMin(){
-    return this->pointMin;
+Vec2d BoundingBox::getMin() const{
+    return (*this).pointMin;
 }
 
-Vec2d BoundingBox::getMax(){
-    return this->pointMax;
+Vec2d BoundingBox::getMax() const{
+    return (*this).pointMax;
 }
 
 void BoundingBox::setMin(Vec2d& point){
-    this->pointMin = point;
+    (*this).pointMin = point;
 }
 
 void BoundingBox::setMax(Vec2d& point){
-    this->pointMax = point;
+    (*this).pointMax = point;
 }
 
 

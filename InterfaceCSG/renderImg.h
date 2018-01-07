@@ -4,12 +4,10 @@
 #include <QGLWidget>
 #include <QTimer>
 
-//#include "image2grey.h"
+#include "image2Grey.h"
 #include "Vec2V.h"
-//#include "particle.h"
-
-//forward declaration
-class BoundingBox;
+#include "particule.h"
+#include "BoundingBox.h"
 
 class RenderImg : public QGLWidget
 {
@@ -18,13 +16,14 @@ class RenderImg : public QGLWidget
     QTimer *m_timer;
 
 public:
-    RenderImg(/*BoundingBox& bb,*/ QWidget *parent = 0);
+    RenderImg(BoundingBox& box, QWidget *parent = 0);
     ~RenderImg();
 
     void loadTexture(const std::string& filename);
+    void saveTexture(const std::string& filename);
     void updateDataTexture();
 
-//	Image2grey & getImg();
+    Image2Grey& getImg();
     unsigned int getWidth();
     unsigned int getHeight();
 
@@ -79,7 +78,7 @@ protected:
     }
 
     /// Tableau de Vecteur
-    int nbrVec;
+    int m_nbrParticule;
     Vec2V* tabVec;
 
 
@@ -102,7 +101,7 @@ protected:
     bool m_drawSobel;
 
     bool m_BBdraw;
-//	BoundingBox& m_BB;
+    BoundingBox& m_BB;
 
 
     void drawBB(const BoundingBox& bb);
@@ -112,9 +111,11 @@ protected:
 //	ici les declaration de:
 //   - l'image a niveau de gris
 //	 - l'image gradiant'
+    Image2Grey m_imgGrey;
 
 //	 la fontaine de particule
 //	Fountain fountain;
+    Particule m_particules[100]; //<- Faire fontaine = tableau particule
 };
 
 #endif // RENDERIMG_H
