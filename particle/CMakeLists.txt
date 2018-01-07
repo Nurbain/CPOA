@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(particle LANGUAGES CXX)
+project(particule LANGUAGES CXX)
 
 file ( GLOB HEADERS *.h *.hpp)
 
