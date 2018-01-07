@@ -8,9 +8,9 @@ public:
     int nbface;
     Vec2d *tabSommet;
 
-    csgPolygon(std::string label, int nbface);
+    csgPolygon(std::string label, int nbfaces);
     csgPolygon(const csgPolygon& copy);
-    ~csgPolygon();
+    ~csgPolygon(){}
 
 
     Vec2d getSommet(int indice);

@@ -10,6 +10,8 @@
 #include "csgPrimitive.h"
 #include "csgTree.h"
 #include "csgOperation.h"
+#include "CsgPolygon.h"
+#include "CsgDisk.h"
 
 #include <map>
 

@@ -10,7 +10,7 @@ public:
 
     csgPrimitive(std::string label);
      csgPrimitive(const csgPrimitive& copy);
-    ~csgPrimitive();
+    ~csgPrimitive(){}
 
      Matrix33d getMatrix();
      void setMatrix(Matrix33d mat);

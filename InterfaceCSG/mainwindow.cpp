@@ -107,12 +107,20 @@ void MainWindow::createPrimtive()
     int sides = ui->nb_sides->value();
 
 // VOTRE CODE ICI : primitive creation
-//	m_currentNode = ??
-
+    if(prim == 0) { // Disk
+        Vec2d vec = {20.,20.};
+        csgDisk *nodeDisk = new csgDisk("disk",vec ,sides);
+        m_currentNode = static_cast<csgNode*> (nodeDisk);
+        m_prim = static_cast<csgPrimitive*> (nodeDisk);
+    } else { //Poly
+        csgPolygon *nodePoly = new csgPolygon("polygon", sides);
+        m_currentNode = static_cast<csgNode*> (nodePoly);
+        m_prim = static_cast<csgPrimitive*> (nodePoly);
+    }
+    m_tree.addPrimitive(m_currentNode);
     drawTree();
-//	ui->currentNode->setValue(??); // recupere l'id du noeud cree
+    ui->currentNode->setValue(m_currentNode->getId()); // recupere l'id du nouveau noeud
     updateTextGraph();
-
 }
 
 
@@ -127,17 +135,23 @@ void MainWindow::createOperation()
     std::cout << " child: "<< left << " & "<< right;
     std::cout << std::endl;
 
-//	CsgOperation* oper=NULL;
+    csgOperation* oper=NULL;
+    csgNode* nodeLeft = m_tree.getNode(left);
+    csgNode* nodeRight = m_tree.getNode(right);
+
+    if(nodeLeft == NULL || nodeRight ==NULL)
+        return;
+
     switch(typeOp)
     {
-        case 0:
-
+        case 0: //Union
+            oper = new csgOperation("union", nodeLeft, nodeRight,opUnion);
             break;
-        case 1:
-
+        case 1: //Interesction
+            oper = new csgOperation("interesct", nodeLeft, nodeRight,opIntersect);
             break;
-        case 2:
-
+        case 2: //Difference
+            oper = new csgOperation("diff", nodeLeft, nodeRight,opDifference);
             break;
         default:
             std::cerr << "unknown operation" << std::endl;
@@ -145,18 +159,20 @@ void MainWindow::createOperation()
             break;
     };
 
-//	if (oper == NULL)
-//		return;
+
+    if (oper == NULL)
+        return;
+
+    m_tree.joinPrimitive(oper);
+
+    m_transfo = Matrix33d::identity();
+    m_currentNode = oper;
 
 // mettre a jour ui->currentNode ui->id_filsGauche ui->id_filsDroit
-
-//	m_transfo = Matrix33d::identity();
-//	m_current_center = oper->getBBox().center();
-//	m_currentNode = oper;
-
-// mettre a jour ui->currentNode ui->id_filsGauche ui->id_filsDroit
-
-
+    ui->currentNode->setValue(oper->getId());
+    ui->id_filsGauche->setValue(oper->getId());
+    ui->id_filsDroit->setValue(oper->getId());
+    drawTree();
     updateTreeRender();
 
     updateTextGraph();
@@ -280,7 +296,7 @@ void MainWindow::saveImage()
     if (!fileName.isEmpty())
     {
         std::string strFN = fileName.toStdString();
-//		m_render->getImg().savePGMascii(strFN);
+        m_render->getImg().saveToPGM(strFN);
     }
 }
 
@@ -370,6 +386,7 @@ void MainWindow::clone()
 
 void MainWindow::drawTree()
 {
+
     m_render->clean();
 //	m_tree.drawInImage( m_render->getImg() );
 
@@ -403,7 +420,7 @@ void MainWindow::drawTree()
             m_tree.drawInImage(fNode, m_render->getImg(),200);
     }
 */
-    m_render->updateDataTexture();
+
 }
 
 
@@ -446,8 +463,8 @@ void MainWindow::updateTextGraph()
 {
     // update Graph in TextWindow
     m_graphTextEdit->clear();
-//	std::string str = m_tree.asciiArtGraph();
-//	m_graphTextEdit->appendPlainText(str.c_str());
+    std::string str = m_tree.afficheTree();
+    m_graphTextEdit->appendPlainText(str.c_str());
 }
 
 

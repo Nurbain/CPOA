@@ -1,11 +1,11 @@
 #include "CsgPolygon.h"
 
-csgPolygon::csgPolygon(std::string label, int nbface) : csgPrimitive(label) {
+csgPolygon::csgPolygon(std::string label, int nbfaces) : csgPrimitive(label) {
 
     nbface = 0;
     tabSommet = new Vec2d[100];
 
-    for (int i = 0; i < nbface; i++) {
+    for (int i = 0; i < nbfaces; i++) {
         double x = 20 * cos(2*M_PI*i/nbface);
         double y = 20 * sin(2*M_PI*i/nbface);
         x = x + 50;

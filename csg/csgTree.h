@@ -22,7 +22,7 @@ public:
     void addPrimitive(csgNode *node);
     void joinPrimitive(csgNode *node);
 
-    void afficheTree();
+    std::string afficheTree();
 };
 
 

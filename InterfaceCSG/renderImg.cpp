@@ -66,6 +66,10 @@ void RenderImg::updateDataTexture()
 }
 
 
+Image2Grey& RenderImg::getImg(){
+    return this->m_imgGrey;
+}
+
 unsigned int RenderImg::getWidth()
 {
     return m_widthTex;
@@ -75,6 +79,7 @@ unsigned int RenderImg::getHeight()
 {
     return m_heightTex;
 }
+
 
 RenderImg::~RenderImg()
 {

@@ -23,7 +23,7 @@ public:
     void saveTexture(const std::string& filename);
     void updateDataTexture();
 
-    Image2Grey& getImg();
+    Image2Grey &getImg();
     unsigned int getWidth();
     unsigned int getHeight();
 

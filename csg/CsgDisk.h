@@ -12,7 +12,7 @@ public:
 
     csgDisk(std::string label,Vec2d centre, int rayon);
     csgDisk(const csgDisk& copy);
-    ~csgDisk();
+    ~csgDisk(){}
 
     int getRayon();
     void setRayon(int rayon);
