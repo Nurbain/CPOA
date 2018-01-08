@@ -48,6 +48,7 @@ public:
    float pointSize;
    Vec2<float> pointSource;
 
+
 protected slots:
     void animate();
 
@@ -115,7 +116,7 @@ protected:
 
 //	 la fontaine de particule
 //	Fountain fountain;
-    Particule m_particules[100]; //<- Faire fontaine = tableau particule
+    Particule* m_particules; //<- Faire fontaine = tableau particule
 };
 
 #endif // RENDERIMG_H

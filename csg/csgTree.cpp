@@ -47,6 +47,7 @@ void csgTree::joinPrimitive(csgNode *node) {
 }
 
 
+
 std::string csgTree::afficheTree() {
     std::string result;
     std::set<csgNode*>::iterator iterator = TreeSet.begin();
@@ -72,3 +73,4 @@ std::string csgTree::afficheTree() {
 
     return result;
 }
+

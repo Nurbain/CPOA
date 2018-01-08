@@ -3,7 +3,7 @@
 
 #include "vector.h"
 
-#define GRAVITY 0.0981
+#define GRAVITY 9.81/100 //Comme avec le prof on divise par 50 l'echelle
 
 class Particule {
 protected:

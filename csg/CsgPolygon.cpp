@@ -73,8 +73,10 @@ BoundingBox csgPolygon::computeBoundingBox() {
     return res;
 }
 
+
 bool csgPolygon::Intersect(Vec2d v) {
 
+    /*
     for(int i=0;i< nbface;i++)
     {
         Vec2d A = tabSommet[i];
@@ -96,7 +98,7 @@ bool csgPolygon::Intersect(Vec2d v) {
         if (d<0)
             return false;
     }
-    return true;
+    return true;*/
 }
 
 

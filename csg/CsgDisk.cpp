@@ -72,7 +72,8 @@ void csgDisk::translation(Vec2d v) {
     Vec3d newVec;
 
     mat_transfo.translation(v[0],v[1]);
-    //newVec = mat_transfo*Vec3d(centre[0],centre[1],((double)1.0)&);
+    Vec3d vec = {centre[0],centre[1],1. };
+    newVec = mat_transfo*vec;
     centre[0] = newVec[0]/newVec[2];
     centre[1] = newVec[1]/newVec[2];
 

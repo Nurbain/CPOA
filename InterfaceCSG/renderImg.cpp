@@ -30,7 +30,17 @@ RenderImg::RenderImg(BoundingBox& box, QWidget *parent ):
     pointSize = 3.;
     m_nbrParticule = 100;
     tabVec = new Vec2V[m_nbrParticule]();
-
+    m_particules = new Particule[m_nbrParticule]();
+    int debut = 0;
+    Vec2d pos;
+    //Init du tableau de particules
+    for(int i=0;i<m_nbrParticule;i++){
+        debut = debut +10;
+        pos = { debut,10 };
+        m_particules[i].setPos_courant(pos);
+        m_particules[i].setDateActuel(100);
+        std::cout << m_particules[i].getDateActuel() <<std::endl;
+    }
     //Init texture parametre
     m_widthTex=m_imgGrey.getWidth();
     m_heightTex=m_imgGrey.getHeight();
@@ -147,6 +157,7 @@ void RenderImg::paintGL()
     for (int i = 0; i < m_nbrParticule; i++ )
     {
         glVertex2fv(tabVec[i].get_ptr());
+        glVertex2d(2.0f*m_particules[i].getPos_courant()[0]/m_widthTex-1.0f,-2.0f*m_particules[i].getPos_courant()[1]/m_heightTex+1.0f);
     }
     glEnd();
 }
@@ -229,14 +240,15 @@ void RenderImg::mouseReleaseEvent(QMouseEvent *event)
 void RenderImg::keyPressEvent(QKeyEvent* event)
 {
     m_state_modifier = event->modifiers();
-
+    double debut = 0;
+    Vec2d pos = { 0,0 };
     switch(event->key())
     {
         case 'A':
-            std::cout << " touche a enfoncee" << std::endl;
+
             break;
         case 'E':
-            // qq init
+
             m_timer->start();
             break;
         case 'S':
@@ -259,11 +271,35 @@ void RenderImg::animate()
 {
     for(int i=0; i<m_nbrParticule ; i++){
         tabVec[i].avance(pointSource[0],pointSource[1]);
+        m_particules[i].computeVitFuture();
+        m_particules[i].computePosFuture();
+        m_particules[i].changePosition();
+        if(m_particules[i].getPos_courant()[0]>getWidth() || m_particules[i].getPos_courant()[1]>getHeight()){
+            Vec2d resetPos={i*10,10};
+            m_particules[i].setPos_courant(resetPos);
+            m_particules[i].setVit_courant(1);
+        }
     }
     update();
 }
 
+/*
+void RenderImg::boucleParticule() {
+    while(m_particules.getDateActuel() < 50000 ) {
+       if ((m_particules.getDateActuel() % 1000) == 0) {
+           std::cout << "date : " << m_particules->getDateActuel() << std::endl;
+           std::cout << "position courante : " << m_particules->getPos_courant()[0] << " " << m_particules.getPos_courant()[1] << std::endl;
+       }
 
+       m_particules.computePosFuture();
+       m_particules->computeVitFuture();
+       this->setPixel(m_particules.getPos_courant()[0], m_particules->getPos_courant()[1],  250 );
+       m_particules->changePosition();
+       m_particules->setDateActuel(m_particules->getDateActuel() + 100);
+    }
+
+}
+*/
 
 void RenderImg::keyReleaseEvent(QKeyEvent* /*event*/)
 {
@@ -335,4 +371,7 @@ void RenderImg::drawBB(const BoundingBox& bb)
     glVertex2f( xImg2GL(bb.getMax()[0]), yImg2GL(bb.getMin()[1]) );
     glEnd();
 }
+
+
+
 

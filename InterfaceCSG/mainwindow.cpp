@@ -119,7 +119,12 @@ void MainWindow::createPrimtive()
     }
     m_tree.addPrimitive(m_currentNode);
     drawTree();
+
     ui->currentNode->setValue(m_currentNode->getId()); // recupere l'id du nouveau noeud
+
+    ui->id_filsGauche->setMaximum(m_currentNode->getId());
+    ui->id_filsDroit->setMaximum(m_currentNode->getId());
+
     updateTextGraph();
 }
 
@@ -172,6 +177,9 @@ void MainWindow::createOperation()
     ui->currentNode->setValue(oper->getId());
     ui->id_filsGauche->setValue(oper->getId());
     ui->id_filsDroit->setValue(oper->getId());
+    ui->id_filsGauche->setMaximum(m_currentNode->getId());
+    ui->id_filsDroit->setMaximum(m_currentNode->getId());
+
     drawTree();
     updateTreeRender();
 

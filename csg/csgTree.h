@@ -18,7 +18,6 @@ public:
     void setTreeSet(const std::set<csgNode *> &csgTreeSet);
     csgNode* getNode(int id);
 
-
     void addPrimitive(csgNode *node);
     void joinPrimitive(csgNode *node);
 

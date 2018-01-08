@@ -3,7 +3,7 @@
 
 
 Particule::Particule(){
-    dateActuel = 0;
+    dateActuel = 1;
     vit_courant = 1;
 }
 
@@ -60,18 +60,17 @@ void Particule::setDateActuel(int dateActuel)
 }
 
 void Particule::computeVitFuture() {
-    int newDate = dateActuel/50;
+    int newDate = dateActuel/100;
     vit_future = vit_courant + GRAVITY * newDate;
-
 }
 
 void Particule::computePosFuture() {
     pos_future[0] = pos_courant[0];
-    int newDate = dateActuel/50;
+    int newDate = dateActuel/100;
     pos_future[1] = pos_courant[1] + vit_courant * newDate + (1/2) * GRAVITY * pow(newDate,2);
 }
 
 void Particule::changePosition() {
     pos_courant = pos_future;
-    vit_future = vit_courant;
+    vit_courant = vit_future;
 }
