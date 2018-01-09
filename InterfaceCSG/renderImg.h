@@ -8,6 +8,9 @@
 #include "Vec2V.h"
 #include "particule.h"
 #include "BoundingBox.h"
+#include "csgNode.h"
+#include "CsgDisk.h"
+#include "CsgPolygon.h"
 
 class RenderImg : public QGLWidget
 {
@@ -48,7 +51,8 @@ public:
    float pointSize;
    Vec2<float> pointSource;
 
-
+  void drawPrimitve(csgNode* node);
+  void drawBB(const BoundingBox& bb);
 protected slots:
     void animate();
 
@@ -105,8 +109,7 @@ protected:
     BoundingBox& m_BB;
 
 
-    void drawBB(const BoundingBox& bb);
-
+    //void drawBB(const BoundingBox& bb);
     void drawSobel();
 
 //	ici les declaration de:

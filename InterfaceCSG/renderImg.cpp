@@ -31,7 +31,7 @@ RenderImg::RenderImg(BoundingBox& box, QWidget *parent ):
     m_nbrParticule = 100;
     tabVec = new Vec2V[m_nbrParticule]();
     m_particules = new Particule[m_nbrParticule]();
-    int debut = 0;
+    double debut = 0;
     Vec2d pos;
     //Init du tableau de particules
     for(int i=0;i<m_nbrParticule;i++){
@@ -39,7 +39,6 @@ RenderImg::RenderImg(BoundingBox& box, QWidget *parent ):
         pos = { debut,10 };
         m_particules[i].setPos_courant(pos);
         m_particules[i].setDateActuel(100);
-        std::cout << m_particules[i].getDateActuel() <<std::endl;
     }
     //Init texture parametre
     m_widthTex=m_imgGrey.getWidth();
@@ -157,7 +156,7 @@ void RenderImg::paintGL()
     for (int i = 0; i < m_nbrParticule; i++ )
     {
         glVertex2fv(tabVec[i].get_ptr());
-        glVertex2d(2.0f*m_particules[i].getPos_courant()[0]/m_widthTex-1.0f,-2.0f*m_particules[i].getPos_courant()[1]/m_heightTex+1.0f);
+        glVertex2d(xImg2GL(m_particules[i].getPos_courant()[0]),yImg2GL(m_particules[i].getPos_courant()[1]));
     }
     glEnd();
 }
@@ -248,7 +247,6 @@ void RenderImg::keyPressEvent(QKeyEvent* event)
 
             break;
         case 'E':
-
             m_timer->start();
             break;
         case 'S':
@@ -266,7 +264,6 @@ void RenderImg::keyPressEvent(QKeyEvent* event)
 
 }
 
-
 void RenderImg::animate()
 {
     for(int i=0; i<m_nbrParticule ; i++){
@@ -275,31 +272,11 @@ void RenderImg::animate()
         m_particules[i].computePosFuture();
         m_particules[i].changePosition();
         if(m_particules[i].getPos_courant()[0]>getWidth() || m_particules[i].getPos_courant()[1]>getHeight()){
-            Vec2d resetPos={i*10,10};
-            m_particules[i].setPos_courant(resetPos);
-            m_particules[i].setVit_courant(1);
+            m_particules[i].setVit_courant(-m_particules[i].getVit_courant()/1.25);
         }
     }
     update();
 }
-
-/*
-void RenderImg::boucleParticule() {
-    while(m_particules.getDateActuel() < 50000 ) {
-       if ((m_particules.getDateActuel() % 1000) == 0) {
-           std::cout << "date : " << m_particules->getDateActuel() << std::endl;
-           std::cout << "position courante : " << m_particules->getPos_courant()[0] << " " << m_particules.getPos_courant()[1] << std::endl;
-       }
-
-       m_particules.computePosFuture();
-       m_particules->computeVitFuture();
-       this->setPixel(m_particules.getPos_courant()[0], m_particules->getPos_courant()[1],  250 );
-       m_particules->changePosition();
-       m_particules->setDateActuel(m_particules->getDateActuel() + 100);
-    }
-
-}
-*/
 
 void RenderImg::keyReleaseEvent(QKeyEvent* /*event*/)
 {
@@ -372,6 +349,26 @@ void RenderImg::drawBB(const BoundingBox& bb)
     glEnd();
 }
 
-
+//Test de Draw de Primitive
+void RenderImg::drawPrimitve(csgNode* node){
+    glPointSize(1.);
+    glColor3f(1.,1.,1.);
+    glBegin(GL_POINTS);
+    csgPrimitive *nodePrim = static_cast<csgPrimitive*>(node);
+    if(nodePrim->getLabel().compare("disk") == 0){
+        std::cout<<"je dessine"<<std::endl;
+        csgDisk *nodeDisk = static_cast<csgDisk*>(nodePrim);
+        double x = nodeDisk->getCentre()[0];
+        double y = nodeDisk->getCentre()[1];
+        for(int i=0;i<100;i++){
+            x=x+1;
+            y=y+1;
+            glVertex2d(2.0f*x/m_widthTex-1.0f,-2.0f*y/m_heightTex+1.0f);
+        }
+    }else if(nodePrim->getLabel().compare("polygon") == 0){
+        csgPolygon *nodePoly = static_cast<csgPolygon*>(nodePoly);
+    }
+    glEnd();
+}
 
 

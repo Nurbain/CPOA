@@ -2,6 +2,10 @@
 #include <math.h>
 
 
+// ---------------------------------------------------------------------
+// All explications for functions are in the file particule.h
+// ---------------------------------------------------------------------
+
 Particule::Particule(){
     dateActuel = 1;
     vit_courant = 1;
@@ -59,16 +63,19 @@ void Particule::setDateActuel(int dateActuel)
     this->dateActuel = dateActuel;
 }
 
+//Suivant le calcule donnée en document
 void Particule::computeVitFuture() {
     int newDate = dateActuel/100;
     vit_future = vit_courant + GRAVITY * newDate;
 }
 
+//Calcule le futur point avec la vitesse courante
 void Particule::computePosFuture() {
     pos_future[0] = pos_courant[0];
     int newDate = dateActuel/100;
     pos_future[1] = pos_courant[1] + vit_courant * newDate + (1/2) * GRAVITY * pow(newDate,2);
 }
+
 
 void Particule::changePosition() {
     pos_courant = pos_future;

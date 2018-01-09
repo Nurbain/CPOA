@@ -106,11 +106,10 @@ void MainWindow::createPrimtive()
     int prim =  ui->prim_type->currentIndex();
     int sides = ui->nb_sides->value();
 
-// VOTRE CODE ICI : primitive creation
     if(prim == 0) { // Disk
-        Vec2d vec = {20.,20.};
-        csgDisk *nodeDisk = new csgDisk("disk",vec ,sides);
-        m_currentNode = static_cast<csgNode*> (nodeDisk);
+        Vec2d vec = {500,500};
+        csgDisk *nodeDisk = new csgDisk("disk",vec ,sides*10);
+        m_currentNode = static_cast<csgDisk*> (nodeDisk);
         m_prim = static_cast<csgPrimitive*> (nodeDisk);
     } else { //Poly
         csgPolygon *nodePoly = new csgPolygon("polygon", sides);
@@ -118,13 +117,16 @@ void MainWindow::createPrimtive()
         m_prim = static_cast<csgPrimitive*> (nodePoly);
     }
     m_tree.addPrimitive(m_currentNode);
-    drawTree();
+    std::cout <<"Création Noeud" << std::endl;
+    std::cout <<"Bounding Box TopRigth : x :" <<  m_currentNode->box.getMax()[0] << "y :" << m_currentNode->box.getMax()[1] << std::endl;
+    std::cout <<"Bounding Box BottomLeft : x :" <<  m_currentNode->box.getMin()[0] << "y :" << m_currentNode->box.getMin()[1] << std::endl;
 
     ui->currentNode->setValue(m_currentNode->getId()); // recupere l'id du nouveau noeud
 
     ui->id_filsGauche->setMaximum(m_currentNode->getId());
     ui->id_filsDroit->setMaximum(m_currentNode->getId());
-
+    m_render->drawPrimitve(m_currentNode);
+    m_render->drawBB(m_currentNode->getBbox());
     updateTextGraph();
 }
 
@@ -179,8 +181,11 @@ void MainWindow::createOperation()
     ui->id_filsDroit->setValue(oper->getId());
     ui->id_filsGauche->setMaximum(m_currentNode->getId());
     ui->id_filsDroit->setMaximum(m_currentNode->getId());
+    std::cout <<"Création Noeud" << std::endl;
+    std::cout <<"Bounding Box TopRigth : x :" <<  m_currentNode->box.getMax()[0] << "y :" << m_currentNode->box.getMax()[1] << std::endl;
+    std::cout <<"Bounding Box BottomLeft : x :" <<  m_currentNode->box.getMin()[0] << "y :" << m_currentNode->box.getMin()[1] << std::endl;
 
-    drawTree();
+    //drawTree();
     updateTreeRender();
 
     updateTextGraph();
@@ -205,7 +210,6 @@ void MainWindow::resetTransfoWidgets()
     ui->rotation->setValue(0);
     m_stopSignal=false;
     transfoSliderChanged();
-
 }
 
 
