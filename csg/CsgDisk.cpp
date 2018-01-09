@@ -1,5 +1,10 @@
 #include "CsgDisk.h"
 
+
+// ---------------------------------------------------------------------
+// All explications for functions are in the file CsgDisk.h
+// ---------------------------------------------------------------------
+
 csgDisk::csgDisk(std::string label, Vec2d centre ,int rayon ) : csgPrimitive(label) {
     this->rayon = rayon;
     this->centre = centre;
@@ -58,6 +63,7 @@ BoundingBox csgDisk::computeBoundingBox() {
     return res;
 }
 
+//Utilise pythagore pour savoir si on est dans le cercle
 bool csgDisk::Intersect(Vec2d v) {
     int pyth = pow(v[0] - centre[0], 2) + pow(centre[1] - v[1], 2);
     if (sqrt(pyth) < rayon) {

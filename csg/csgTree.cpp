@@ -4,6 +4,11 @@
 #include "CsgPolygon.h"
 #include "csgPrimitive.h"
 
+
+// ---------------------------------------------------------------------
+// All explications for functions are in the file csgTree.h
+// ---------------------------------------------------------------------
+
 csgTree::csgTree() {
 
 }

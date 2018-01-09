@@ -1,5 +1,9 @@
 #include "csgPrimitive.h"
 
+// ---------------------------------------------------------------------
+// All explications for functions are in the file csgPrimitive.h
+// ---------------------------------------------------------------------
+
 csgPrimitive::csgPrimitive(std::string label) : csgNode(label) {
     mat_transfo = Matrix33d();
 }
@@ -16,7 +20,6 @@ Matrix33d csgPrimitive::getMatrix() {
 void csgPrimitive::setMatrix(Matrix33d mat) {
     mat_transfo = mat;
 }
-
 
 bool csgPrimitive::IntersectBBox(Vec2d v){
     Vec2d max = box.getMax();

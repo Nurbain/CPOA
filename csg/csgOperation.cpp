@@ -1,5 +1,10 @@
 #include "csgOperation.h"
 
+// ---------------------------------------------------------------------
+// All explications for functions are in the file csgOperation.h
+// ---------------------------------------------------------------------
+
+
 csgOperation::csgOperation(std::string label, csgNode* filsG, csgNode* filsD, enum operation op) : csgNode(label){
     this->filsG = filsG;
     this->filsD = filsD;
@@ -61,6 +66,7 @@ bool csgOperation::Intersect(Vec2d v){
 
     return true;
 }
+
 
 bool csgOperation::IntersectBBox(Vec2d v){
     if (operation == opUnion) {

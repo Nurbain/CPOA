@@ -1,6 +1,10 @@
 #include "BoundingBox.h"
 #include "math.h"
 
+// ---------------------------------------------------------------------
+// All explications for functions are in the file BoundingBox.h
+// ---------------------------------------------------------------------
+
 BoundingBox::BoundingBox(){
 
 }
@@ -28,7 +32,6 @@ BoundingBox BoundingBox::operator=(const BoundingBox& box){
     return *this;
 }
 
-// Union //ref avecstd::max
 BoundingBox BoundingBox::operator+(const BoundingBox& box){
     BoundingBox result;
     if((*this).pointMin[0]<=box.pointMin[0]){
@@ -60,7 +63,6 @@ BoundingBox BoundingBox::operator-(const BoundingBox& box){
     return *this;
 }
 
-//intersection TODO comme il faut
 BoundingBox BoundingBox::operator^(const BoundingBox& box){
     BoundingBox result;
 

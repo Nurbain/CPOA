@@ -1,6 +1,11 @@
 #include "csgNode.h"
 
-// initialisation du membre statique (obligatoire)
+// ---------------------------------------------------------------------
+// All explications for functions are in the file csgNode.h
+// ---------------------------------------------------------------------
+
+
+// initialisation du membre statique
 int csgNode::nb_node = 0;
 
 
@@ -36,8 +41,6 @@ int csgNode::getId() {
 void csgNode::setId(int id) {
     this->label = label;
 }
-
-
 
 csgNode *csgNode::getParent() {
     return parent;

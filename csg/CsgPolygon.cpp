@@ -1,11 +1,16 @@
 #include "CsgPolygon.h"
 
+// ---------------------------------------------------------------------
+// All explications for functions are in the file csgPolygon.h
+// ---------------------------------------------------------------------
+
 csgPolygon::csgPolygon(std::string label, int nbfaces) : csgPrimitive(label) {
 
     nbface = 0;
     tabSommet = new Vec2d[100];
 
     for (int i = 0; i < nbfaces; i++) {
+        //Fait en sorte de tourner pour avoir un polygone "rond" triangle,carré,penta ect
         double x = 20 * cos(2*M_PI*i/nbface);
         double y = 20 * sin(2*M_PI*i/nbface);
         x = x + 50;
@@ -76,7 +81,6 @@ BoundingBox csgPolygon::computeBoundingBox() {
 
 bool csgPolygon::Intersect(Vec2d v) {
 
-    /*
     for(int i=0;i< nbface;i++)
     {
         Vec2d A = tabSommet[i];
@@ -98,7 +102,7 @@ bool csgPolygon::Intersect(Vec2d v) {
         if (d<0)
             return false;
     }
-    return true;*/
+    return true;
 }
 
 
